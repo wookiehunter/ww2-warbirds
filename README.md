@@ -46,15 +46,27 @@ https://commons.wikimedia.org/wiki/Special:FilePath/<filename>?width=1200
 
 This means any Wikimedia Commons filename works directly — no hotlinking to `upload.wikimedia.org` hashes that can change. The helper `wm(filename)` in `lib/aircraft.ts` builds these URLs.
 
-### If an image 404s
+### Graceful fallback
 
-The filenames in `lib/aircraft.ts` are best-effort matches against Commons. If any specific image fails to resolve:
+Every image on the site is rendered through the `SafeImage` component (`components/SafeImage.tsx`), a thin `<img>` wrapper that listens for `onError` and swaps in a dossier-styled placeholder (`public/placeholder.svg`) if the remote image fails to load. This means a missing or renamed Wikimedia file never shows a broken-image icon — the visual continuity of the site holds up even when individual photographs are unavailable.
+
+`SafeImage` also accepts an optional `fallbackSrc` prop for a secondary URL to try before giving up on the placeholder:
+
+```tsx
+<SafeImage
+  src="https://example.com/primary.jpg"
+  fallbackSrc="https://example.com/backup.jpg"
+  alt="..."
+/>
+```
+
+### Replacing an image permanently
 
 1. Find a working replacement — the Wikipedia article infobox for that aircraft is usually the fastest source. Right-click the image → "Copy image address"
 2. Edit the `image:` field for that entry in `lib/aircraft.ts`
-3. Any full URL works — `next.config.js` has `images.unoptimized: true` and permissive `remotePatterns`, and the site uses plain `<img>` tags for maximum flexibility
+3. Any full URL works — the site uses plain `<img>` via `SafeImage`, so there are no remote-host restrictions
 
-Other good sources for replacements:
+Good sources:
 - [Wikimedia Commons](https://commons.wikimedia.org/) — search by aircraft designation
 - [NARA (U.S. National Archives)](https://catalog.archives.gov/)
 - [IWM Collections](https://www.iwm.org.uk/collections)
@@ -83,9 +95,12 @@ ww2-aircraft/
 ├── components/
 │   ├── AircraftCard.tsx
 │   ├── Navbar.tsx
-│   └── Footer.tsx
+│   ├── Footer.tsx
+│   └── SafeImage.tsx         # <img> wrapper with placeholder fallback
 ├── lib/
 │   └── aircraft.ts           # all aircraft data + helpers
+├── public/
+│   └── placeholder.svg       # dossier-styled fallback graphic
 ├── next.config.js
 ├── tailwind.config.ts
 ├── tsconfig.json

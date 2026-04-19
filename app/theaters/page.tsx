@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { aircraft } from '@/lib/aircraft';
+import SafeImage from '@/components/SafeImage';
 
 export const metadata = {
   title: 'Theatres — Contrails & Cordite',
@@ -103,8 +104,7 @@ export default function Theatres() {
               <div className="grid lg:grid-cols-2 gap-10 items-start">
                 <div className={i % 2 ? 'lg:order-2' : ''}>
                   <div className="aspect-[4/3] border border-olive-700/60 overflow-hidden corner-mark">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={t.image} alt="" className="w-full h-full object-cover img-treatment" />
+                    <SafeImage src={t.image} alt="" className="w-full h-full object-cover img-treatment" />
                   </div>
                 </div>
                 <div className={i % 2 ? 'lg:order-1' : ''}>

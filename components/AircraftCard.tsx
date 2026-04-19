@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Aircraft } from '@/lib/aircraft';
+import SafeImage from '@/components/SafeImage';
 
 export default function AircraftCard({ a, index = 0 }: { a: Aircraft; index?: number }) {
   return (
@@ -9,8 +10,7 @@ export default function AircraftCard({ a, index = 0 }: { a: Aircraft; index?: nu
       style={{ animationDelay: `${index * 40}ms` }}
     >
       <div className="aspect-[4/3] relative overflow-hidden bg-ink-800">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SafeImage
           src={a.image}
           alt={a.name}
           className="w-full h-full object-cover img-treatment transition-transform duration-700 group-hover:scale-105"

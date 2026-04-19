@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SafeImage from '@/components/SafeImage'
 
 export const metadata = {
   title: 'About — Contrails & Cordite',
@@ -11,11 +12,11 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative border-b border-olive-800/60 bg-ink-950">
         <div className="absolute inset-0 opacity-20">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <SafeImage
             src="https://commons.wikimedia.org/wiki/Special:FilePath/B-17_formation_over_Schweinfurt,_17_August_1943.jpg?width=1600"
             alt=""
             className="w-full h-full object-cover img-treatment"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-ink-950/60 via-ink-950/80 to-ink-950" />
         </div>

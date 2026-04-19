@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { aircraft, nations, byNation } from '@/lib/aircraft';
 import AircraftCard from '@/components/AircraftCard';
+import SafeImage from '@/components/SafeImage';
 
 const featured = ['supermarine-spitfire', 'p-51-mustang', 'messerschmitt-bf-109', 'mitsubishi-a6m-zero'];
 
@@ -12,11 +13,11 @@ export default function Home() {
       {/* ── HERO ── */}
       <section className="relative overflow-hidden border-b border-olive-700/60">
         <div className="absolute inset-0 opacity-40">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <SafeImage
             src="https://commons.wikimedia.org/wiki/Special:FilePath/Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg?width=1800"
             alt=""
             className="w-full h-full object-cover img-treatment"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-ink-950/70 via-ink-950/80 to-ink-950" />
         </div>
