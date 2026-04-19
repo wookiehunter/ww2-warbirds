@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>VECTOR ZERO-NINE — A Field Manual for the Warbirds of 1939–1945</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@400;700;900&family=Oswald:wght@300;400;500;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#e8dcc1;
+    --paper-2:#d8c89f;
+    --paper-3:#c2b083;
+    --ink:#181410;
+    --ink-soft:#2c2620;
+    --rust:#7a2418;
+    --rust-2:#a23420;
+    --olive:#3f4a2c;
+    --olive-2:#5d6b40;
+    --brass:#a87932;
+    --sky:#1d3043;
+    --stamp:#5a1a14;
+    --line:rgba(24,20,16,0.22);
+    --line-soft:rgba(24,20,16,0.08);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Crimson Text', Georgia, serif;
+    color:var(--ink);
+    background:var(--paper);
+    overflow-x:hidden;
+    line-height:1.55;
+    font-size:17px;
+  }
+
+  /* paper texture */
+  body::before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(122,36,24,0.06), transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(63,74,44,0.07), transparent 55%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.07 0 0 0 0 0.05 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode:multiply;
+    opacity:.65;
+  }
+  /* faint horizontal ruling to feel like an old field journal */
+  body::after{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:repeating-linear-gradient(to bottom, transparent 0 31px, rgba(122,36,24,0.05) 31px 32px);
+    mix-blend-mode:multiply;
+    opacity:.35;
+  }
+
+  .wrap{position:relative;z-index:2}
+
+  /* ============ TOP STRIP ============ */
+  .topstrip{
+    border-bottom:1px solid var(--ink);
+    padding:8px 28px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    background:var(--ink);color:var(--paper);
+  }
+  .topstrip span{display:inline-flex;align-items:center;gap:10px}
+  .topstrip .dot{width:7px;height:7px;background:var(--rust-2);border-radius:50%;animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+  /* ============ MASTHEAD ============ */
+  .masthead{
+    border-bottom:3px double var(--ink);
+    padding:24px 28px 18px;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:24px;
+  }
+  .mast-l, .mast-r{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;line-height:1.7;
+    text-transform:uppercase;letter-spacing:.12em;
+  }
+  .mast-r{text-align:right}
+  .mast-l b, .mast-r b{color:var(--rust)}
+
+  .mast-c{text-align:center}
+  .mast-c .vec{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;
+    font-size:clamp(48px, 9vw, 124px);
+    line-height:.85;
+    letter-spacing:.04em;
+    color:var(--ink);
+    text-shadow:2px 2px 0 var(--paper-2);
+  }
+  .mast-c .sub{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-weight:300;
+    letter-spacing:.55em;
+    font-size:13px;
+    margin-top:10px;
+    color:var(--ink-soft);
+  }
+  .mast-c .sub2{
+    font-family:'Special Elite', monospace;
+    font-size:13px;
+    margin-top:6px;
+    color:var(--rust);
+  }
+
+  /* nav */
+  nav.primary{
+    display:flex;justify-content:center;gap:0;
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+    background:var(--paper-2);
+    padding:0;
+  }
+  nav.primary a{
+    font-family:'Oswald', sans-serif;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:12px;
+    padding:14px 22px;
+    color:var(--ink);
+    text-decoration:none;
+    border-right:1px solid var(--line);
+    position:relative;
+    transition:background .2s,color .2s;
+  }
+  nav.primary a:first-child{border-left:1px solid var(--line)}
+  nav.primary a:hover{background:var(--ink);color:var(--paper)}
+  nav.primary a::before{
+    content:"◢";color:var(--rust);margin-right:8px;font-size:9px;vertical-align:middle;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    padding:60px 28px 40px;
+    border-bottom:1px solid var(--ink);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:60px;align-items:center;
+    max-width:1380px;margin:0 auto;
+  }
+  .hero-left .stamp{
+    display:inline-block;
+    border:2px solid var(--stamp);
+    color:var(--stamp);
+    padding:5px 14px;
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-weight:700;letter-spacing:.3em;font-size:11px;
+    transform:rotate(-3deg);
+    opacity:.85;margin-bottom:24px;
+  }
+  .hero-left h1{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;
+    font-size:clamp(44px,6vw,82px);
+    line-height:.92;letter-spacing:.01em;
+    color:var(--ink);
+    margin-bottom:22px;
+  }
+  .hero-left h1 em{font-style:normal;color:var(--rust)}
+  .hero-left .lede{
+    font-size:20px;line-height:1.55;color:var(--ink-soft);
+    max-width:520px;margin-bottom:30px;
+    font-family:'Crimson Text', serif;
+  }
+  .hero-left .lede::first-letter{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;
+    font-size:62px;float:left;line-height:.85;padding:6px 12px 0 0;color:var(--rust);
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;letter-spacing:.2em;font-size:12px;font-weight:600;
+    padding:14px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+    border:1.5px solid var(--ink);
+    transition:all .2s;cursor:pointer;
+  }
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn.primary:hover{background:var(--rust);border-color:var(--rust)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+
+  .hero-right{position:relative;min-height:420px}
+  .hero-aircraft{
+    width:100%;height:auto;
+    filter:drop-shadow(6px 6px 0 rgba(122,36,24,0.28));
+  }
+  .hero-meta{
+    position:absolute;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .hero-meta::before{content:"";display:inline-block;width:18px;height:1px;background:var(--ink);vertical-align:middle;margin-right:8px}
+  .hm1{top:8%;left:0%}
+  .hm2{top:36%;right:0%;text-align:right}
+  .hm2::before{display:none}
+  .hm2::after{content:"";display:inline-block;width:18px;height:1px;background:var(--ink);vertical-align:middle;margin-left:8px}
+  .hm3{bottom:14%;left:8%}
+  .hm4{bottom:0%;right:6%;text-align:right}
+  .hm4::before{display:none}
+  .hm4::after{content:"";display:inline-block;width:18px;height:1px;background:var(--ink);vertical-align:middle;margin-left:8px}
+
+  .corner{position:absolute;width:24px;height:24px;border:2px solid var(--ink);}
+  .corner.tl{top:18px;left:18px;border-right:0;border-bottom:0}
+  .corner.tr{top:18px;right:18px;border-left:0;border-bottom:0}
+  .corner.bl{bottom:18px;left:18px;border-right:0;border-top:0}
+  .corner.br{bottom:18px;right:18px;border-left:0;border-top:0}
+
+  /* ticker */
+  .ticker{
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+    background:var(--ink);color:var(--paper);
+    overflow:hidden;white-space:nowrap;padding:10px 0;
+    font-family:'JetBrains Mono', monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  }
+  .ticker-track{display:inline-block;animation:tick 60s linear infinite}
+  .ticker-track span{padding:0 30px;border-right:1px solid var(--paper-3)}
+  .ticker-track span b{color:var(--rust-2)}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ============ SECTIONS ============ */
+  section{padding:80px 28px;border-bottom:1px solid var(--ink);position:relative}
+  .container{max-width:1380px;margin:0 auto}
+
+  .section-head{
+    display:grid;grid-template-columns:auto 1fr auto;align-items:end;gap:24px;
+    margin-bottom:50px;padding-bottom:18px;border-bottom:1px solid var(--ink);
+  }
+  .section-num{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;font-size:88px;line-height:.8;color:var(--rust);
+  }
+  .section-title h2{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;font-size:clamp(34px,4vw,54px);line-height:.95;
+    color:var(--ink);text-transform:uppercase;letter-spacing:.02em;
+  }
+  .section-title .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--rust);
+    margin-bottom:8px;
+  }
+  .section-meta{
+    font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-soft);text-align:right;line-height:1.7;
+  }
+
+  /* ========= AIRCRAFT DOSSIER GRID ========= */
+  .dossiers{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border:1px solid var(--ink);
+  }
+  .dossier{
+    border-right:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:28px;background:var(--paper);
+    position:relative;
+    transition:background .25s, transform .25s;
+  }
+  .dossier:nth-child(3n){border-right:0}
+  .dossier:nth-last-child(-n+3){border-bottom:0}
+  .dossier:hover{background:var(--paper-2);transform:translate(-2px,-2px)}
+
+  .dossier-head{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    border-bottom:1px dashed var(--line);padding-bottom:14px;margin-bottom:16px;
+  }
+  .dossier-id{
+    font-family:'JetBrains Mono', monospace;font-size:10px;
+    letter-spacing:.2em;color:var(--rust);text-transform:uppercase;
+  }
+  .dossier-flag{
+    font-family:'Oswald', sans-serif;font-size:10px;letter-spacing:.25em;
+    text-transform:uppercase;border:1px solid var(--ink);padding:3px 8px;
+    background:var(--ink);color:var(--paper);
+  }
+  .dossier-flag.uk{background:var(--sky);border-color:var(--sky)}
+  .dossier-flag.us{background:var(--olive);border-color:var(--olive)}
+  .dossier-flag.de{background:var(--ink);border-color:var(--ink)}
+  .dossier-flag.jp{background:var(--rust);border-color:var(--rust)}
+  .dossier-flag.su{background:var(--rust-2);border-color:var(--rust-2)}
+
+  .dossier h3{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;font-size:30px;line-height:.95;letter-spacing:.01em;
+    color:var(--ink);text-transform:uppercase;margin-bottom:4px;
+  }
+  .dossier .nick{
+    font-family:'Special Elite', monospace;font-size:14px;color:var(--rust);
+    font-style:italic;margin-bottom:18px;
+  }
+  .dossier .silhouette{
+    width:100%;height:90px;display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .dossier .silhouette svg{width:100%;height:100%;max-width:280px}
+  .dossier .silhouette path,.dossier .silhouette polygon{fill:var(--ink)}
+
+  .dossier .role{
+    font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.18em;
+    font-size:11px;color:var(--ink-soft);margin-bottom:12px;
+    padding-bottom:8px;border-bottom:1px solid var(--line-soft);
+  }
+  .dossier .desc{
+    font-size:14px;line-height:1.55;color:var(--ink-soft);margin-bottom:16px;
+  }
+  .specs{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border-top:1px solid var(--ink);
+    font-family:'JetBrains Mono', monospace;font-size:10px;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .specs div{
+    padding:8px 0;border-bottom:1px dotted var(--line);
+    display:flex;justify-content:space-between;
+  }
+  .specs div:nth-child(odd){padding-right:14px;border-right:1px dotted var(--line)}
+  .specs div:nth-child(even){padding-left:14px}
+  .specs div:nth-last-child(-n+2){border-bottom:0}
+  .specs span:first-child{color:var(--ink-soft);}
+  .specs span:last-child{color:var(--ink);font-weight:700}
+
+  /* ========= STAT BAR (combat record) ========= */
+  .combat-record{
+    margin-top:90px;
+    background:var(--ink);color:var(--paper);
+    padding:50px 40px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+    border:1px solid var(--ink);
+    position:relative;
+  }
+  .combat-record::before{
+    content:"PRODUCTION FIGURES — TOTAL UNITS BUILT, 1939–1945";
+    position:absolute;top:-12px;left:30px;background:var(--paper);color:var(--ink);
+    padding:4px 14px;font-family:'JetBrains Mono', monospace;font-size:10px;
+    letter-spacing:.2em;border:1px solid var(--ink);
+  }
+  .stat-block .num{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;font-size:64px;line-height:1;color:var(--paper);
+  }
+  .stat-block .num small{font-size:24px;color:var(--brass);margin-left:4px}
+  .stat-block .label{
+    font-family:'Oswald', sans-serif;text-transform:uppercase;
+    letter-spacing:.2em;font-size:11px;color:var(--paper-3);margin-top:8px;
+  }
+  .stat-block .meta{
+    font-family:'Crimson Text', serif;font-style:italic;color:var(--paper-2);
+    font-size:13px;margin-top:6px;
+  }
+
+  /* ========= THEATRES ========= */
+  .theatres{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:start;
+  }
+  .theatre-list{display:flex;flex-direction:column}
+  .theatre{
+    border-top:1px solid var(--ink);
+    padding:24px 0;
+    display:grid;grid-template-columns:80px 1fr auto;gap:24px;align-items:start;
+    cursor:pointer;transition:padding .2s, background .2s;
+  }
+  .theatre:hover{padding-left:14px;background:var(--paper-2)}
+  .theatre:last-child{border-bottom:1px solid var(--ink)}
+  .theatre .yrs{
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;font-size:34px;line-height:.95;color:var(--rust);
+  }
+  .theatre h4{
+    font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.1em;
+    font-weight:700;font-size:20px;margin-bottom:6px;
+  }
+  .theatre p{font-size:14px;color:var(--ink-soft);line-height:1.55;max-width:520px}
+  .theatre .arrow{
+    font-family:'JetBrains Mono', monospace;font-size:18px;color:var(--ink);
+    align-self:center;
+  }
+
+  .theatre-map{
+    border:1px solid var(--ink);
+    background:#f0e6cc;
+    padding:24px;
+    position:relative;
+    aspect-ratio:1/0.85;
+  }
+  .theatre-map::before{
+    content:"OPS MAP / FIG. 02";position:absolute;top:-10px;left:18px;background:var(--paper);
+    padding:2px 12px;font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.2em;
+    border:1px solid var(--ink);
+  }
+  .theatre-map svg{width:100%;height:100%}
+
+  /* ========= ACES ========= */
+  .aces{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--ink);
+  }
+  .ace{
+    border-right:1px solid var(--ink);padding:32px 24px;text-align:center;
+    background:var(--paper);transition:background .2s;
+  }
+  .ace:last-child{border-right:0}
+  .ace:hover{background:var(--ink);color:var(--paper)}
+  .ace:hover .ace-num,.ace:hover .ace-flag,.ace:hover .ace-meta{color:var(--brass)}
+  .ace:hover .ace-name{color:var(--paper)}
+
+  .ace-flag{
+    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.25em;
+    color:var(--rust);text-transform:uppercase;margin-bottom:18px;transition:color .2s;
+  }
+  .ace-portrait{
+    width:84px;height:84px;border-radius:50%;
+    background:var(--paper-3);margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid var(--ink);
+    font-family:'Big Shoulders Stencil Display', sans-serif;
+    font-weight:900;font-size:30px;color:var(--ink);
+    position:relative;
+  }
+  .ace-portrait::after{
+    content:"";position:absolute;inset:-7px;border:1px dashed var(--ink);border-radius:50%;
+  }
+  .ace-name{
+    font-family:'Oswald', sans-serif;font-weight:700;text-transform:uppercase;
+    letter-spacing:.06em;font-size:16px;line-height:1.15;margin-bottom:4px;transition:color .2s;
+  }
+  .ace-meta{
+    font-family:'Crimson Text', serif;font-style:italic;font-size:13px;
+    color:var(--ink-soft);margin-bottom:18px;transition:color .2s;
+  }
+  .ace-num{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;
+    font-size:54px;line-height:1;color:var(--rust);transition:color .2s;
+  }
+  .ace-label{
+    font-family:'JetBrains Mono', monospace;font-size:9px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--ink-soft);margin-top:4px;
+  }
+
+  /* ========= TIMELINE ========= */
+  .timeline{
+    position:relative;padding-left:60px;
+  }
+  .timeline::before{
+    content:"";position:absolute;left:18px;top:0;bottom:0;
+    width:2px;
+    background:repeating-linear-gradient(to bottom, var(--ink) 0 8px, transparent 8px 14px);
+  }
+  .tl-event{
+    position:relative;padding:30px 0 30px 50px;
+    border-bottom:1px dashed var(--line);
+  }
+  .tl-event:last-child{border-bottom:0}
+  .tl-event::before{
+    content:"";position:absolute;left:-49px;top:38px;width:14px;height:14px;
+    border:2px solid var(--ink);background:var(--paper);
+  }
+  .tl-event.major::before{background:var(--rust);border-color:var(--rust)}
+  .tl-date{
+    font-family:'JetBrains Mono', monospace;font-size:12px;letter-spacing:.18em;
+    color:var(--rust);text-transform:uppercase;margin-bottom:6px;
+  }
+  .tl-event h4{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;
+    font-size:32px;line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin-bottom:8px;
+  }
+  .tl-event p{
+    font-size:16px;color:var(--ink-soft);max-width:780px;line-height:1.55;
+  }
+  .tl-event .casualties{
+    margin-top:14px;display:flex;gap:30px;
+    font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  }
+  .tl-event .casualties span b{color:var(--rust);font-size:14px;display:block}
+
+  /* ========= COMPARISON ========= */
+  .compare-wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:1px solid var(--ink);
+  }
+  .compare-side{
+    padding:40px 32px;background:var(--paper);
+  }
+  .compare-side.right{border-left:1px solid var(--ink);background:var(--paper-2)}
+  .compare-flag{
+    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--rust);margin-bottom:12px;
+  }
+  .compare-name{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;
+    font-size:54px;line-height:.9;letter-spacing:.01em;text-transform:uppercase;margin-bottom:6px;
+  }
+  .compare-sub{font-family:'Special Elite', monospace;font-size:14px;color:var(--ink-soft);margin-bottom:24px;font-style:italic}
+  .compare-sil svg{width:100%;height:120px;margin:18px 0}
+  .compare-sil path,.compare-sil polygon{fill:var(--ink)}
+
+  .stat-row{
+    display:grid;grid-template-columns:140px 1fr 60px;gap:14px;align-items:center;
+    padding:10px 0;border-bottom:1px dotted var(--line);
+    font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .stat-row .lbl{color:var(--ink-soft)}
+  .stat-row .bar{height:8px;background:var(--paper-3);position:relative;overflow:hidden}
+  .stat-row .bar::after{content:"";position:absolute;inset:0;width:var(--w,50%);background:var(--rust)}
+  .compare-side.right .stat-row .bar::after{background:var(--olive)}
+  .stat-row .val{text-align:right;font-weight:700;color:var(--ink)}
+
+  .verdict{
+    padding:24px 32px;background:var(--ink);color:var(--paper);
+    grid-column:1/-1;border-top:1px solid var(--ink);
+    font-family:'Crimson Text', serif;font-style:italic;font-size:16px;line-height:1.55;
+  }
+  .verdict::before{
+    content:"FIELD ASSESSMENT —";color:var(--brass);font-style:normal;font-family:'JetBrains Mono', monospace;
+    font-size:11px;letter-spacing:.2em;margin-right:14px;
+  }
+
+  /* ========= MUSEUMS ========= */
+  .museums{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .museum{
+    border:1px solid var(--ink);background:var(--paper);padding:28px;
+    position:relative;transition:background .2s;
+  }
+  .museum:hover{background:var(--paper-2)}
+  .museum-region{
+    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.25em;
+    color:var(--rust);text-transform:uppercase;margin-bottom:14px;
+    display:flex;justify-content:space-between;
+  }
+  .museum h4{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;
+    font-size:28px;line-height:1;text-transform:uppercase;margin-bottom:8px;
+  }
+  .museum .loc{
+    font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.16em;
+    font-size:12px;color:var(--ink-soft);margin-bottom:18px;
+  }
+  .museum p{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:16px}
+  .museum .holdings{
+    border-top:1px dashed var(--line);padding-top:14px;
+    font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink);
+  }
+  .museum .holdings b{color:var(--rust)}
+
+  /* ========= READING ROOM ========= */
+  .reading{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start;
+  }
+  .reading-list{
+    border-top:1px solid var(--ink);
+  }
+  .book{
+    display:grid;grid-template-columns:38px 1fr auto;gap:18px;align-items:center;
+    padding:18px 0;border-bottom:1px solid var(--line);
+    transition:padding .2s;cursor:pointer;
+  }
+  .book:hover{padding-left:10px}
+  .book .idx{
+    font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.15em;
+    color:var(--rust);
+  }
+  .book .info h5{
+    font-family:'Crimson Text', serif;font-weight:600;font-size:18px;line-height:1.25;
+  }
+  .book .info span{
+    font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.12em;
+    font-size:11px;color:var(--ink-soft);
+  }
+  .book .yr{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;font-size:24px;color:var(--ink);
+  }
+
+  .quote-card{
+    border:1px solid var(--ink);background:var(--paper-2);
+    padding:36px 32px;position:relative;
+  }
+  .quote-card::before{
+    content:"DISPATCH";position:absolute;top:-10px;left:24px;background:var(--ink);color:var(--paper);
+    padding:3px 14px;font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.25em;
+  }
+  .quote-card blockquote{
+    font-family:'Crimson Text', serif;font-style:italic;font-size:22px;line-height:1.45;
+    color:var(--ink);margin-bottom:24px;
+  }
+  .quote-card blockquote::before{content:"“";font-size:54px;line-height:0;vertical-align:-22px;color:var(--rust);margin-right:6px}
+  .quote-card cite{
+    font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.18em;
+    font-size:12px;font-style:normal;color:var(--ink-soft);
+    display:block;border-top:1px solid var(--ink);padding-top:14px;
+  }
+  .quote-card cite b{color:var(--rust);display:block;font-size:14px;letter-spacing:.18em;margin-bottom:2px}
+
+  /* ========= GLOSSARY ========= */
+  .glossary{
+    columns:3;column-gap:40px;column-rule:1px dashed var(--line);
+  }
+  .term{
+    break-inside:avoid;margin-bottom:22px;
+  }
+  .term dt{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;
+    font-size:22px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);
+  }
+  .term dt small{
+    font-family:'JetBrains Mono', monospace;font-size:10px;color:var(--rust);
+    letter-spacing:.15em;margin-left:8px;font-weight:400;
+  }
+  .term dd{font-size:14px;color:var(--ink-soft);line-height:1.5;margin-top:4px}
+
+  /* ========= ENLIST ========= */
+  .enlist{
+    background:var(--ink);color:var(--paper);border-bottom:1px solid var(--ink);
+    padding:90px 28px;position:relative;overflow:hidden;
+  }
+  .enlist::before{
+    content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(45deg, rgba(168,121,50,0.06) 0 2px, transparent 2px 12px);
+    pointer-events:none;
+  }
+  .enlist-grid{
+    max-width:1380px;margin:0 auto;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;position:relative;
+  }
+  .enlist h2{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;
+    font-size:clamp(48px,6vw,88px);line-height:.9;text-transform:uppercase;color:var(--paper);
+    margin-bottom:20px;
+  }
+  .enlist h2 em{font-style:normal;color:var(--brass)}
+  .enlist p{font-size:18px;color:var(--paper-2);line-height:1.55;margin-bottom:30px;max-width:540px}
+  .enlist .form{
+    background:var(--paper);color:var(--ink);padding:34px;border:2px solid var(--brass);
+    position:relative;
+  }
+  .enlist .form::before{
+    content:"FORM AF-1939 / SQUADRON ROSTER";position:absolute;top:-12px;left:20px;
+    background:var(--ink);color:var(--brass);padding:3px 12px;
+    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.2em;
+  }
+  .enlist .form label{
+    display:block;font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.18em;
+    font-size:11px;color:var(--ink-soft);margin-bottom:6px;margin-top:18px;
+  }
+  .enlist .form label:first-of-type{margin-top:8px}
+  .enlist .form input, .enlist .form select{
+    width:100%;padding:12px 14px;border:1px solid var(--ink);background:var(--paper);
+    font-family:'Special Elite', monospace;font-size:15px;color:var(--ink);
+  }
+  .enlist .form input:focus, .enlist .form select:focus{
+    outline:0;background:var(--paper-2);border-color:var(--rust);
+  }
+  .enlist .form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .enlist .form button{
+    width:100%;margin-top:24px;padding:16px;border:0;background:var(--ink);color:var(--paper);
+    font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.3em;font-weight:700;
+    cursor:pointer;transition:background .2s;
+  }
+  .enlist .form button:hover{background:var(--rust)}
+
+  /* ========= FOOTER ========= */
+  footer{
+    background:var(--paper-2);border-top:3px double var(--ink);
+    padding:60px 28px 24px;
+  }
+  .foot-grid{
+    max-width:1380px;margin:0 auto;
+    display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:50px;
+  }
+  .foot-brand .vec{
+    font-family:'Big Shoulders Stencil Display', sans-serif;font-weight:900;font-size:54px;line-height:.9;
+  }
+  .foot-brand p{font-size:14px;color:var(--ink-soft);max-width:340px;margin-top:12px;line-height:1.55}
+  .foot-col h6{
+    font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--rust);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--ink);
+  }
+  .foot-col a{
+    display:block;font-family:'Oswald', sans-serif;text-transform:uppercase;letter-spacing:.1em;
+    font-size:13px;color:var(--ink);text-decoration:none;padding:6px 0;transition:color .2s, padding .2s;
+  }
+  .foot-col a:hover{color:var(--rust);padding-left:8px}
+  .foot-bottom{
+    max-width:1380px;margin:50px auto 0;padding-top:24px;border-top:1px solid var(--ink);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono', monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .foot-bottom .roundel{
+    display:inline-block;width:18px;height:18px;border-radius:50%;
+    background:radial-gradient(circle, var(--paper) 22%, var(--ink) 23% 36%, var(--rust) 37% 56%, var(--ink) 57% 72%, var(--paper) 73%);
+    vertical-align:middle;margin:0 10px;
+  }
+
+  /* responsive */
+  @media (max-width:1080px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .dossiers{grid-template-columns:repeat(2,1fr)}
+    .dossier:nth-child(3n){border-right:1px solid var(--ink)}
+    .dossier:nth-child(2n){border-right:0}
+    .dossier:nth-last-child(-n+3){border-bottom:1px solid var(--ink)}
+    .dossier:nth-last-child(-n+2){border-bottom:0}
+    .combat-record{grid-template-columns:repeat(2,1fr)}
+    .theatres{grid-template-columns:1fr}
+    .aces{grid-template-columns:repeat(2,1fr)}
+    .ace{border-bottom:1px solid var(--ink)}
+    .ace:nth-child(2n){border-right:0}
+    .compare-wrap{grid-template-columns:1fr}
+    .compare-side.right{border-left:0;border-top:1px solid var(--ink)}
+    .museums{grid-template-columns:1fr}
+    .reading{grid-template-columns:1fr}
+    .glossary{columns:2}
+    .enlist-grid, .foot-grid{grid-template-columns:1fr}
+    .section-head{grid-template-columns:auto 1fr;gap:18px}
+    .section-meta{display:none}
+    nav.primary{flex-wrap:wrap}
+  }
+  @media (max-width:640px){
+    .masthead{grid-template-columns:1fr;text-align:center;gap:14px}
+    .mast-l, .mast-r{text-align:center}
+    .dossiers{grid-template-columns:1fr}
+    .dossier{border-right:0}
+    .combat-record{grid-template-columns:1fr;padding:40px 24px}
+    .aces{grid-template-columns:1fr}
+    .ace{border-right:0}
+    .glossary{columns:1}
+    section{padding:60px 20px}
+    .topstrip{flex-direction:column;gap:6px;text-align:center}
+    nav.primary a{padding:10px 14px;font-size:11px;letter-spacing:.15em}
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ TOP STRIP ============ -->
+  <div class="topstrip">
+    <span><span class="dot"></span> Transmitting · Channel 09 · Vector Zero-Nine</span>
+    <span>Vol. XXIV · Issue 04 · Apr 2026</span>
+    <span>Cleared for Public Release</span>
+  </div>
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="mast-l">
+      Est. 2003 · <b>Archive No. 09-A</b><br/>
+      A field manual maintained by enthusiasts,<br/>
+      restorers and historians worldwide.
+    </div>
+    <div class="mast-c">
+      <div class="vec">VECTOR 09</div>
+      <div class="sub">Warbirds · 1939 — 1945</div>
+      <div class="sub2">— a field manual for the planes that fought the war —</div>
+    </div>
+    <div class="mast-r">
+      <b>STATION KILO</b> · 51.5°N 0.1°W<br/>
+      Wind 240/12 · Vis 10km<br/>
+      Cloud BKN 3,500 · Temp 11°C
+    </div>
+  </header>
+
+  <!-- ============ NAV ============ -->
+  <nav class="primary">
+    <a href="#dossiers">Dossiers</a>
+    <a href="#theatres">Theatres</a>
+    <a href="#aces">Aces</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#compare">Comparison</a>
+    <a href="#museums">Museums</a>
+    <a href="#reading">Reading Room</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#enlist">Enlist</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" style="padding-top:80px">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="stamp">DECLASSIFIED · For the Curious</div>
+        <h1>Sixty thousand <em>warbirds</em>. One field manual.</h1>
+        <p class="lede">From the elliptical wings of the Spitfire to the inverted gull of the Corsair, this is the everything-you-wanted-to-know archive for the aircraft that decided the Second World War — built and maintained by the enthusiasts who keep their memory aloft.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#dossiers">Open the Dossiers →</a>
+          <a class="btn ghost" href="#enlist">Join the Squadron</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <span class="hero-meta hm1">Specimen 01 / Spitfire Mk. IX · 1942</span>
+        <span class="hero-meta hm2">Wingspan 11.23 m / 36 ft 10 in</span>
+        <span class="hero-meta hm3">Powerplant: Rolls-Royce Merlin 61</span>
+        <span class="hero-meta hm4">Service Ceiling 13,100 m / 43,000 ft</span>
+        <!-- Spitfire-style three-quarter silhouette -->
+        <svg class="hero-aircraft" viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg">
+          <!-- compass rose / blueprint accents -->
+          <g stroke="rgba(24,20,16,0.25)" fill="none" stroke-width="0.7">
+            <circle cx="120" cy="340" r="46"/>
+            <circle cx="120" cy="340" r="30"/>
+            <line x1="120" y1="290" x2="120" y2="390"/>
+            <line x1="70" y1="340" x2="170" y2="340"/>
+            <text x="120" y="282" font-family="JetBrains Mono" font-size="9" fill="rgba(24,20,16,0.6)" text-anchor="middle" letter-spacing="2">N</text>
+            <text x="120" y="402" font-family="JetBrains Mono" font-size="9" fill="rgba(24,20,16,0.6)" text-anchor="middle" letter-spacing="2">S</text>
+          </g>
+          <!-- ruler bar -->
+          <g stroke="rgba(24,20,16,0.5)" stroke-width="0.7">
+            <line x1="540" y1="60" x2="700" y2="60"/>
+            <line x1="540" y1="55" x2="540" y2="65"/>
+            <line x1="700" y1="55" x2="700" y2="65"/>
+            <line x1="580" y1="57" x2="580" y2="63"/>
+            <line x1="620" y1="57" x2="620" y2="63"/>
+            <line x1="660" y1="57" x2="660" y2="63"/>
+            <text x="620" y="50" font-family="JetBrains Mono" font-size="9" fill="rgba(24,20,16,0.7)" text-anchor="middle" letter-spacing="1">11.23 M · WINGSPAN</text>
+          </g>
+
+          <!-- Spitfire silhouette (top-down, stylized) -->
+          <g fill="#181410">
+            <!-- fuselage -->
+            <path d="M 40 210 L 90 198 L 540 196 L 660 208 L 690 215 L 660 222 L 540 224 L 90 222 Z"/>
+            <!-- nose / spinner -->
+            <path d="M 40 210 L 28 205 L 22 210 L 28 215 Z"/>
+            <!-- canopy -->
+            <path d="M 360 200 L 405 192 L 460 192 L 480 200 L 480 220 L 460 228 L 405 228 L 360 220 Z" fill="#2c2620"/>
+            <!-- elliptical wings -->
+            <path d="M 240 210 C 235 80, 285 40, 330 60 C 360 90, 360 200, 360 210 L 360 220 C 360 230, 360 340, 330 360 C 285 380, 235 340, 240 220 Z"/>
+            <!-- wing roundels (RAF) -->
+            <circle cx="295" cy="120" r="14" fill="#1d3043"/>
+            <circle cx="295" cy="120" r="10" fill="#e8dcc1"/>
+            <circle cx="295" cy="120" r="6" fill="#7a2418"/>
+            <circle cx="295" cy="300" r="14" fill="#1d3043"/>
+            <circle cx="295" cy="300" r="10" fill="#e8dcc1"/>
+            <circle cx="295" cy="300" r="6" fill="#7a2418"/>
+            <!-- horizontal stabilizers -->
+            <path d="M 590 210 C 620 170, 670 170, 690 195 L 690 210 Z"/>
+            <path d="M 590 220 C 620 260, 670 260, 690 235 L 690 220 Z"/>
+            <!-- vertical stabilizer (top-down hint) -->
+            <path d="M 620 210 L 690 205 L 700 210 L 690 215 L 620 215 Z" fill="#2c2620"/>
+            <!-- gun ports -->
+            <rect x="200" y="160" width="6" height="3" />
+            <rect x="200" y="170" width="6" height="3" />
+            <rect x="200" y="180" width="6" height="3" />
+            <rect x="200" y="248" width="6" height="3" />
+            <rect x="200" y="258" width="6" height="3" />
+            <rect x="200" y="268" width="6" height="3" />
+          </g>
+          <!-- crosshair callouts -->
+          <g stroke="rgba(122,36,24,0.7)" stroke-width="0.8" fill="none">
+            <circle cx="295" cy="120" r="20"/>
+            <line x1="295" y1="100" x2="295" y2="80"/>
+            <line x1="295" y1="80" x2="220" y2="80"/>
+            <text x="218" y="76" font-family="JetBrains Mono" font-size="9" fill="rgba(122,36,24,0.9)" text-anchor="end" letter-spacing="1">A — RAF ROUNDEL TYPE B</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span><b>↗</b> Spitfire Mk. XIV restored to airworthy at Duxford · 2026</span>
+      <span><b>↗</b> P-51 “Frenesi” returns to Chino following 4-year refit</span>
+      <span><b>↗</b> Bf 109 G-6 wreckage recovered from Norwegian fjord</span>
+      <span><b>↗</b> 80th anniversary of VE Day commemorations announced</span>
+      <span><b>↗</b> New Lancaster crew memorial unveiled at East Kirkby</span>
+      <span><b>↗</b> Pacific Aviation Museum acquires A6M2 Zero airframe</span>
+      <span><b>↗</b> Spitfire Mk. XIV restored to airworthy at Duxford · 2026</span>
+      <span><b>↗</b> P-51 “Frenesi” returns to Chino following 4-year refit</span>
+      <span><b>↗</b> Bf 109 G-6 wreckage recovered from Norwegian fjord</span>
+      <span><b>↗</b> 80th anniversary of VE Day commemorations announced</span>
+      <span><b>↗</b> New Lancaster crew memorial unveiled at East Kirkby</span>
+      <span><b>↗</b> Pacific Aviation Museum acquires A6M2 Zero airframe</span>
+    </div>
+  </div>
+
+  <!-- ============ DOSSIERS ============ -->
+  <section id="dossiers">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">01</div>
+        <div class="section-title">
+          <div class="kicker">PART ONE / AIRCRAFT DOSSIERS</div>
+          <h2>Twelve Machines<br/>That Decided the War</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 12 — 36<br/>
+          REF. AC/12-D<br/>
+          REVISED Q1 2026
+        </div>
+      </div>
+
+      <div class="dossiers">
+
+        <!-- 1: Spitfire -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 01-A</span>
+            <span class="dossier-flag uk">UK · RAF</span>
+          </div>
+          <h3>Supermarine Spitfire</h3>
+          <div class="nick">“The thoroughbred of the sky.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M10 45 L40 42 L210 42 L260 47 L270 50 L260 53 L210 53 L40 53 Z"/><path d="M90 45 C85 10, 130 5, 150 15 C160 30, 160 45, 160 50 C160 55, 160 75, 150 80 C130 85, 85 80, 90 50 Z"/><path d="M230 45 C245 30, 265 30, 270 42 L270 47 Z"/><path d="M230 53 C245 65, 265 65, 270 53 L270 51 Z"/></svg>
+          </div>
+          <div class="role">Single-seat Interceptor / Fighter</div>
+          <p class="desc">Reginald Mitchell's elliptical-winged masterpiece flew in every theatre of the European war. Twenty-four marks, more than 22,000 airframes, and an aerodynamic legacy that outlived the conflict by decades.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1936</span></div>
+            <div><span>Max Speed</span><span>652 km/h</span></div>
+            <div><span>Range</span><span>1,840 km</span></div>
+            <div><span>Engine</span><span>Merlin 61</span></div>
+            <div><span>Armament</span><span>2×20mm + 4×.303</span></div>
+          </div>
+        </article>
+
+        <!-- 2: Mustang -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 02-A</span>
+            <span class="dossier-flag us">US · USAAF</span>
+          </div>
+          <h3>P-51 Mustang</h3>
+          <div class="nick">“The bomber's escort, the bomber's salvation.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M8 45 L36 41 L215 41 L262 47 L272 50 L262 53 L215 53 L36 53 Z"/><polygon points="80,45 80,8 175,8 175,45 175,82 80,82"/><polygon points="225,45 270,32 272,42 272,50 272,58 270,68 225,53"/></svg>
+          </div>
+          <div class="role">Long-Range Escort Fighter</div>
+          <p class="desc">North American married a clean American airframe to a British Merlin and produced the war's most consequential fighter — capable of fighting from England to Berlin and back, and changing the daylight bombing campaign forever.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1940</span></div>
+            <div><span>Max Speed</span><span>703 km/h</span></div>
+            <div><span>Range</span><span>2,755 km</span></div>
+            <div><span>Engine</span><span>Packard V-1650-7</span></div>
+            <div><span>Armament</span><span>6 × .50 cal</span></div>
+          </div>
+        </article>
+
+        <!-- 3: Bf 109 -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 03-A</span>
+            <span class="dossier-flag de">DE · LUFTWAFFE</span>
+          </div>
+          <h3>Messerschmitt Bf 109</h3>
+          <div class="nick">“Stiffer, smaller, and very nearly enough.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M10 46 L42 42 L208 42 L258 48 L270 50 L258 52 L208 53 L42 53 Z"/><polygon points="84,46 84,12 168,12 168,46 168,78 84,78"/><polygon points="228,45 268,30 272,40 272,50 272,60 268,70 228,53"/></svg>
+          </div>
+          <div class="role">Single-seat Fighter</div>
+          <p class="desc">Built in greater numbers than any other fighter in history. Willy Messerschmitt's tightly-cowled design served from 1939 to 1945 in every Luftwaffe theatre, scoring more aerial victories than any other type.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1935</span></div>
+            <div><span>Max Speed</span><span>640 km/h</span></div>
+            <div><span>Range</span><span>850 km</span></div>
+            <div><span>Engine</span><span>DB 605A</span></div>
+            <div><span>Armament</span><span>1×30mm + 2×13mm</span></div>
+          </div>
+        </article>
+
+        <!-- 4: Zero -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 04-B</span>
+            <span class="dossier-flag jp">JP · IJN</span>
+          </div>
+          <h3>Mitsubishi A6M Zero</h3>
+          <div class="nick">“The carrier-fighter that ruled a year.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M14 45 L40 42 L212 42 L260 47 L272 50 L260 53 L212 53 L40 53 Z"/><path d="M88 45 C82 14, 122 8, 156 18 C166 32, 166 46, 166 50 C166 54, 166 70, 156 80 C122 90, 82 86, 88 50 Z"/><path d="M232 45 C248 32, 268 32, 272 43 L272 50 Z"/><path d="M232 53 C248 66, 268 66, 272 55 L272 50 Z"/></svg>
+          </div>
+          <div class="role">Naval Carrier Fighter</div>
+          <p class="desc">Light, manoeuvrable, and devastatingly long-legged for a carrier fighter. From Pearl Harbour to Midway the Zero owned the Pacific sky — until armour, self-sealing tanks and the Hellcat ended its supremacy.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1939</span></div>
+            <div><span>Max Speed</span><span>565 km/h</span></div>
+            <div><span>Range</span><span>3,100 km</span></div>
+            <div><span>Engine</span><span>Nakajima Sakae 21</span></div>
+            <div><span>Armament</span><span>2×20mm + 2×7.7mm</span></div>
+          </div>
+        </article>
+
+        <!-- 5: B-17 -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 05-C</span>
+            <span class="dossier-flag us">US · USAAF</span>
+          </div>
+          <h3>B-17 Flying Fortress</h3>
+          <div class="nick">“The four-engined argument for daylight bombing.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M10 45 L36 39 L228 39 L262 47 L274 50 L262 53 L228 56 L36 56 Z"/><polygon points="40,45 40,4 240,4 240,45 240,86 40,86"/><polygon points="232,45 274,28 276,40 276,50 276,60 274,72 232,53"/><circle cx="80" cy="20" r="4" fill="#181410"/><circle cx="80" cy="70" r="4"/><circle cx="200" cy="20" r="4"/><circle cx="200" cy="70" r="4"/></svg>
+          </div>
+          <div class="role">Heavy Bomber</div>
+          <p class="desc">Boeing's high-altitude four-engine bomber endured cannon, flak and frostbite to deliver the USAAF's daylight precision-bombing doctrine over Fortress Europe — at a cost still difficult to grasp.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>10</span></div>
+            <div><span>First Flight</span><span>1935</span></div>
+            <div><span>Max Speed</span><span>462 km/h</span></div>
+            <div><span>Range</span><span>3,219 km</span></div>
+            <div><span>Engines</span><span>4 × R-1820</span></div>
+            <div><span>Bombload</span><span>3,600 kg</span></div>
+          </div>
+        </article>
+
+        <!-- 6: Lancaster -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 06-C</span>
+            <span class="dossier-flag uk">UK · RAF BC</span>
+          </div>
+          <h3>Avro Lancaster</h3>
+          <div class="nick">“The bomb-bay that swallowed cities.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M10 45 L36 41 L226 41 L260 47 L272 50 L260 53 L226 55 L36 55 Z"/><polygon points="50,45 50,6 230,6 230,45 230,84 50,84"/><polygon points="222,45 274,30 276,42 276,50 276,60 274,72 222,53"/><circle cx="90" cy="22" r="3.5"/><circle cx="90" cy="68" r="3.5"/><circle cx="190" cy="22" r="3.5"/><circle cx="190" cy="68" r="3.5"/></svg>
+          </div>
+          <div class="role">Heavy Night Bomber</div>
+          <p class="desc">RAF Bomber Command's principal heavy. Cavernous, capable and terrible — the Lancaster carried everything from incendiaries to the 22,000 lb Grand Slam, and its crews suffered the highest casualty rate of any major Allied service.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>7</span></div>
+            <div><span>First Flight</span><span>1941</span></div>
+            <div><span>Max Speed</span><span>454 km/h</span></div>
+            <div><span>Range</span><span>4,073 km</span></div>
+            <div><span>Engines</span><span>4 × Merlin XX</span></div>
+            <div><span>Bombload</span><span>10,000 kg</span></div>
+          </div>
+        </article>
+
+        <!-- 7: Stuka -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 07-D</span>
+            <span class="dossier-flag de">DE · LUFTWAFFE</span>
+          </div>
+          <h3>Junkers Ju 87 Stuka</h3>
+          <div class="nick">“The siren of the Blitzkrieg.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M14 45 L40 42 L214 42 L262 47 L274 50 L262 53 L214 53 L40 53 Z"/><polygon points="60,45 60,12 200,12 200,45 200,78 60,78" /><polygon points="60,45 14,55 14,53 50,48 60,46"/><polygon points="60,45 14,35 14,37 50,42 60,44"/><polygon points="234,45 274,30 276,42 276,50 276,58 274,70 234,53"/></svg>
+          </div>
+          <div class="role">Dive Bomber / Anti-Tank</div>
+          <p class="desc">Inverted-gull wings, fixed undercarriage, and Jericho-Trompete sirens designed to terrify. The Stuka was Blitzkrieg's flying artillery — devastating in 1939–41, easy meat by 1943.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>2</span></div>
+            <div><span>First Flight</span><span>1935</span></div>
+            <div><span>Max Speed</span><span>410 km/h</span></div>
+            <div><span>Range</span><span>500 km</span></div>
+            <div><span>Engine</span><span>Jumo 211J</span></div>
+            <div><span>Bombload</span><span>1,800 kg</span></div>
+          </div>
+        </article>
+
+        <!-- 8: Fw 190 -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 08-A</span>
+            <span class="dossier-flag de">DE · LUFTWAFFE</span>
+          </div>
+          <h3>Focke-Wulf Fw 190</h3>
+          <div class="nick">“The Würger — the butcher-bird.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M10 46 L40 42 L210 42 L260 47 L272 50 L260 53 L210 53 L40 53 Z"/><polygon points="84,46 84,10 172,10 172,46 172,80 84,80"/><polygon points="232,45 270,30 272,40 272,50 272,60 270,70 232,53"/></svg>
+          </div>
+          <div class="role">Fighter / Fighter-Bomber</div>
+          <p class="desc">Kurt Tank's radial-engined response to the Spitfire shocked the RAF when it appeared in 1941. A roll rate, dive speed and pilot view that the Bf 109 could never match.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1939</span></div>
+            <div><span>Max Speed</span><span>685 km/h</span></div>
+            <div><span>Range</span><span>800 km</span></div>
+            <div><span>Engine</span><span>BMW 801D-2</span></div>
+            <div><span>Armament</span><span>4×20mm + 2×13mm</span></div>
+          </div>
+        </article>
+
+        <!-- 9: P-38 -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 09-A</span>
+            <span class="dossier-flag us">US · USAAF</span>
+          </div>
+          <h3>P-38 Lightning</h3>
+          <div class="nick">“Der Gabelschwanz-Teufel — the fork-tailed devil.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><rect x="20" y="48" width="220" height="6"/><rect x="60" y="20" width="140" height="6"/><rect x="60" y="76" width="140" height="6"/><rect x="50" y="20" width="14" height="62"/><rect x="200" y="20" width="14" height="62"/><polygon points="60,15 200,15 200,8 220,8 220,18 200,18 60,18"/><polygon points="60,84 200,84 200,90 220,90 220,80 200,80 60,80"/><rect x="120" y="40" width="40" height="22"/></svg>
+          </div>
+          <div class="role">Long-Range Fighter / Recon</div>
+          <p class="desc">Twin-boom, twin-engined, and unmistakable. The Lightning ranged from the Aleutians to Bougainville — where, on 18 April 1943, it intercepted and killed Admiral Yamamoto in the longest fighter intercept of the war to that date.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1939</span></div>
+            <div><span>Max Speed</span><span>667 km/h</span></div>
+            <div><span>Range</span><span>2,100 km</span></div>
+            <div><span>Engines</span><span>2 × V-1710</span></div>
+            <div><span>Armament</span><span>1×20mm + 4×.50</span></div>
+          </div>
+        </article>
+
+        <!-- 10: P-47 -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 10-A</span>
+            <span class="dossier-flag us">US · USAAF</span>
+          </div>
+          <h3>P-47 Thunderbolt</h3>
+          <div class="nick">“The Jug — seven tons of angry hardware.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M6 46 L36 40 L216 40 L262 47 L274 50 L262 53 L216 56 L36 56 Z"/><polygon points="80,46 80,8 178,8 178,46 178,84 80,84"/><polygon points="226,45 274,30 276,42 276,50 276,60 274,72 226,53"/></svg>
+          </div>
+          <div class="role">Heavy Fighter / Ground Attack</div>
+          <p class="desc">Republic's enormous radial-engined fighter could absorb damage that would atomise a Spitfire and dive faster than anything in the European theatre. By 1944 it was the USAAF's premier ground-attack aircraft.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1941</span></div>
+            <div><span>Max Speed</span><span>697 km/h</span></div>
+            <div><span>Range</span><span>1,290 km</span></div>
+            <div><span>Engine</span><span>R-2800-59</span></div>
+            <div><span>Armament</span><span>8 × .50 cal</span></div>
+          </div>
+        </article>
+
+        <!-- 11: Yak-3 -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 11-A</span>
+            <span class="dossier-flag su">SU · VVS</span>
+          </div>
+          <h3>Yakovlev Yak-3</h3>
+          <div class="nick">“Light as a knife at low altitude.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M14 45 L36 42 L208 42 L258 47 L270 50 L258 53 L208 53 L36 53 Z"/><polygon points="76,45 76,16 168,16 168,45 168,76 76,76"/><polygon points="226,45 268,32 272,42 272,50 272,60 268,68 226,53"/></svg>
+          </div>
+          <div class="role">Single-seat Fighter</div>
+          <p class="desc">A small, rugged and astonishingly nimble fighter optimised for low-altitude combat over the Eastern Front. Luftwaffe pilots were warned to avoid combat with Yaks below 5,000 m.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1944</span></div>
+            <div><span>Max Speed</span><span>655 km/h</span></div>
+            <div><span>Range</span><span>650 km</span></div>
+            <div><span>Engine</span><span>Klimov VK-105PF2</span></div>
+            <div><span>Armament</span><span>1×20mm + 2×12.7</span></div>
+          </div>
+        </article>
+
+        <!-- 12: Corsair -->
+        <article class="dossier reveal">
+          <div class="dossier-head">
+            <span class="dossier-id">DOSSIER 12-B</span>
+            <span class="dossier-flag us">US · USN/USMC</span>
+          </div>
+          <h3>F4U Corsair</h3>
+          <div class="nick">“Whistling Death — the bent-wing bird.”</div>
+          <div class="silhouette">
+            <svg viewBox="0 0 280 90"><path d="M14 45 L40 42 L210 42 L260 47 L272 50 L260 53 L210 53 L40 53 Z"/><path d="M70 45 L100 14 L170 14 L170 45 L170 76 L100 76 L70 45 Z"/><polygon points="232,45 270,30 272,42 272,50 272,60 270,70 232,53"/></svg>
+          </div>
+          <div class="role">Naval Fighter / Fighter-Bomber</div>
+          <p class="desc">Inverted gull-wing carrier fighter built around the immense Pratt &amp; Whitney R-2800. The Marines made it famous over Guadalcanal; the Royal Navy taught it to land on a carrier first.</p>
+          <div class="specs">
+            <div><span>Crew</span><span>1</span></div>
+            <div><span>First Flight</span><span>1940</span></div>
+            <div><span>Max Speed</span><span>671 km/h</span></div>
+            <div><span>Range</span><span>1,617 km</span></div>
+            <div><span>Engine</span><span>R-2800-8W</span></div>
+            <div><span>Armament</span><span>6 × .50 cal</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Combat record stat strip -->
+      <div class="combat-record">
+        <div class="stat-block">
+          <div class="num">33,984</div>
+          <div class="label">Bf 109 produced</div>
+          <div class="meta">More than any fighter in history.</div>
+        </div>
+        <div class="stat-block">
+          <div class="num">22,685</div>
+          <div class="label">Spitfires built</div>
+          <div class="meta">24 marks across nine years.</div>
+        </div>
+        <div class="stat-block">
+          <div class="num">15,875</div>
+          <div class="label">P-51 Mustangs</div>
+          <div class="meta">Plus 200+ flying examples today.</div>
+        </div>
+        <div class="stat-block">
+          <div class="num">12,731<small>+</small></div>
+          <div class="label">B-17 Fortresses</div>
+          <div class="meta">Around a dozen still airworthy.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THEATRES ============ -->
+  <section id="theatres" style="background:var(--paper-2)">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">02</div>
+        <div class="section-title">
+          <div class="kicker">PART TWO / THEATRES OF OPERATION</div>
+          <h2>Where the Air War<br/>Was Fought</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 37 — 58<br/>
+          REF. TH/02-T<br/>
+          MAPS UPDATED 2025
+        </div>
+      </div>
+
+      <div class="theatres">
+        <div class="theatre-list">
+          <div class="theatre">
+            <div class="yrs">1940</div>
+            <div>
+              <h4>Battle of Britain — Western Europe</h4>
+              <p>The first decisive battle fought entirely in the air. RAF Fighter Command's Hurricanes and Spitfires denied the Luftwaffe air superiority over the Channel, ending Hitler's plan to invade Britain.</p>
+            </div>
+            <div class="arrow">→</div>
+          </div>
+          <div class="theatre">
+            <div class="yrs">1941–45</div>
+            <div>
+              <h4>Strategic Bombing — Germany</h4>
+              <p>RAF Bomber Command by night, the USAAF Eighth Air Force by day. Lancasters, Halifaxes, B-17s and B-24s waged a four-year campaign that killed 600,000 Germans and 79,000 Allied aircrew.</p>
+            </div>
+            <div class="arrow">→</div>
+          </div>
+          <div class="theatre">
+            <div class="yrs">1941–43</div>
+            <div>
+              <h4>Eastern Front — USSR</h4>
+              <p>Yakovlev and Lavochkin fighters, Ilyushin Shturmoviks, and the longest air war of the conflict. The Soviet Union eventually deployed more aircraft than any other belligerent.</p>
+            </div>
+            <div class="arrow">→</div>
+          </div>
+          <div class="theatre">
+            <div class="yrs">1941–45</div>
+            <div>
+              <h4>Pacific — Carrier War</h4>
+              <p>Pearl Harbor, Coral Sea, Midway, the Philippine Sea. Naval aviation came of age aboard the decks of the IJN and US Navy. Wildcats, Hellcats, Avengers, Vals, Kates and the long-legged Zero.</p>
+            </div>
+            <div class="arrow">→</div>
+          </div>
+          <div class="theatre">
+            <div class="yrs">1942–43</div>
+            <div>
+              <h4>North Africa &amp; Mediterranean</h4>
+              <p>Desert Air Force operations from Egypt to Tunisia. Hurricanes, Kittyhawks and Bostons supporting the Eighth Army; a rehearsal for the close-air-support doctrine that would dominate Normandy.</p>
+            </div>
+            <div class="arrow">→</div>
+          </div>
+          <div class="theatre">
+            <div class="yrs">1944–45</div>
+            <div>
+              <h4>CBI — China, Burma, India</h4>
+              <p>The forgotten theatre. AVG "Flying Tigers", USAAF B-29s flying "the Hump", and the longest sustained jungle air-supply operation in history.</p>
+            </div>
+            <div class="arrow">→</div>
+          </div>
+        </div>
+
+        <div class="theatre-map">
+          <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+            <!-- crude continents in stencil -->
+            <g fill="rgba(24,20,16,0.18)" stroke="rgba(24,20,16,0.45)" stroke-width="0.6">
+              <!-- Europe -->
+              <path d="M120 60 L210 50 L235 75 L240 110 L210 130 L155 130 L130 110 Z"/>
+              <!-- Africa -->
+              <path d="M150 130 L215 130 L235 175 L210 235 L185 245 L168 220 L150 175 Z"/>
+              <!-- Asia -->
+              <path d="M240 50 L360 60 L385 110 L370 145 L320 150 L290 130 L240 110 Z"/>
+              <!-- Pacific island arcs -->
+              <path d="M350 165 L380 180 L375 200 L350 195 Z"/>
+              <path d="M335 215 L360 220 L355 240 L330 235 Z"/>
+              <path d="M315 245 L340 252 L335 268 L312 262 Z"/>
+              <!-- North America (right edge slightly off-frame) -->
+              <path d="M30 100 L100 85 L120 130 L95 175 L40 170 Z"/>
+              <!-- South America -->
+              <path d="M70 200 L110 190 L120 240 L95 290 L75 285 L60 240 Z"/>
+            </g>
+            <!-- Operation markers -->
+            <g font-family="JetBrains Mono" font-size="9" fill="#7a2418" letter-spacing="1">
+              <circle cx="170" cy="78" r="5" fill="#7a2418"/>
+              <text x="178" y="74">BRITAIN ’40</text>
+              <circle cx="200" cy="98" r="5" fill="#7a2418"/>
+              <text x="208" y="94">GERMANY ’42–45</text>
+              <circle cx="265" cy="85" r="5" fill="#7a2418"/>
+              <text x="273" y="81">EAST FRONT</text>
+              <circle cx="200" cy="180" r="5" fill="#7a2418"/>
+              <text x="208" y="176">N. AFRICA</text>
+              <circle cx="350" cy="140" r="5" fill="#7a2418"/>
+              <text x="358" y="136">CBI ’42–45</text>
+              <circle cx="365" cy="195" r="5" fill="#7a2418"/>
+              <text x="263" y="216" text-anchor="end">PACIFIC ’41–45</text>
+              <line x1="265" y1="212" x2="362" y2="200" stroke="#7a2418" stroke-width="0.6"/>
+            </g>
+            <!-- Compass -->
+            <g transform="translate(60,300)" stroke="#181410" stroke-width="0.7" fill="#181410">
+              <circle cx="0" cy="0" r="14" fill="none"/>
+              <polygon points="0,-12 3,0 0,12 -3,0"/>
+              <text y="-18" font-family="JetBrains Mono" font-size="8" text-anchor="middle">N</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACES ============ -->
+  <section id="aces">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">03</div>
+        <div class="section-title">
+          <div class="kicker">PART THREE / NOTABLE PILOTS</div>
+          <h2>The Aces of the<br/>Five Air Forces</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 59 — 71<br/>
+          KILL TOTALS PER<br/>OFFICIAL CLAIM RECORDS
+        </div>
+      </div>
+
+      <div class="aces">
+        <div class="ace">
+          <div class="ace-flag">★ LUFTWAFFE · DE</div>
+          <div class="ace-portrait">EH</div>
+          <div class="ace-name">Erich Hartmann</div>
+          <div class="ace-meta">JG 52 · "Bubi" · 1922–1993</div>
+          <div class="ace-num">352</div>
+          <div class="ace-label">Confirmed Kills</div>
+        </div>
+        <div class="ace">
+          <div class="ace-flag">☭ VVS · USSR</div>
+          <div class="ace-portrait">IK</div>
+          <div class="ace-name">Ivan Kozhedub</div>
+          <div class="ace-meta">240 IAP · La-5/La-7 · 1920–1991</div>
+          <div class="ace-num">64</div>
+          <div class="ace-label">Top Allied Ace</div>
+        </div>
+        <div class="ace">
+          <div class="ace-flag">⊕ IJN · JAPAN</div>
+          <div class="ace-portrait">HN</div>
+          <div class="ace-name">Hiroyoshi Nishizawa</div>
+          <div class="ace-meta">Tainan Kōkūtai · A6M · 1920–1944</div>
+          <div class="ace-num">87</div>
+          <div class="ace-label">Estimated Kills</div>
+        </div>
+        <div class="ace">
+          <div class="ace-flag">★ USAAF · USA</div>
+          <div class="ace-portrait">RB</div>
+          <div class="ace-name">Richard Bong</div>
+          <div class="ace-meta">49th FG · P-38 · 1920–1945</div>
+          <div class="ace-num">40</div>
+          <div class="ace-label">Top US Ace</div>
+        </div>
+        <div class="ace">
+          <div class="ace-flag">✪ RAF · UK</div>
+          <div class="ace-portrait">JJ</div>
+          <div class="ace-name">Johnnie Johnson</div>
+          <div class="ace-meta">No. 610 Sqn · Spitfire · 1915–2001</div>
+          <div class="ace-num">34</div>
+          <div class="ace-label">Top RAF Ace</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TIMELINE ============ -->
+  <section id="timeline" style="background:var(--paper-2)">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">04</div>
+        <div class="section-title">
+          <div class="kicker">PART FOUR / OPERATIONAL CHRONOLOGY</div>
+          <h2>Six Years in<br/>Twelve Engagements</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 72 — 96<br/>
+          ENTRIES BY DATE OF<br/>FIRST CONTACT
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-event major">
+          <div class="tl-date">01 SEP 1939 — POLAND</div>
+          <h4>Wieluń &amp; the First Stuka Strike</h4>
+          <p>At 04:40 hours Junkers Ju 87s of I./StG 76 attack the undefended Polish town of Wieluń, opening the air war that will not end for 2,194 days.</p>
+        </div>
+        <div class="tl-event major">
+          <div class="tl-date">10 JUL — 31 OCT 1940 · UK</div>
+          <h4>The Battle of Britain</h4>
+          <p>RAF Fighter Command — 1,963 single-seat fighters and a brand-new radar network — defeats the Luftwaffe's attempt to win air superiority over southern England.</p>
+          <div class="casualties">
+            <span><b>1,977</b> Luftwaffe aircraft lost</span>
+            <span><b>1,744</b> RAF aircraft lost</span>
+            <span><b>~3,000</b> aircrew killed</span>
+          </div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-date">07 DEC 1941 — HAWAII</div>
+          <h4>Pearl Harbor</h4>
+          <p>353 IJN aircraft launched from six carriers strike Battleship Row. The action sinks four US battleships, kills 2,403, and brings the United States into the war.</p>
+        </div>
+        <div class="tl-event">
+          <div class="tl-date">04–07 JUN 1942 · MIDWAY</div>
+          <h4>Midway — The Pacific Turning Point</h4>
+          <p>SBD Dauntless dive-bombers from USS <i>Enterprise</i> and <i>Yorktown</i> sink four IJN fleet carriers in roughly six minutes. The IJN never recovers its strategic initiative.</p>
+          <div class="casualties">
+            <span><b>4</b> IJN carriers sunk</span>
+            <span><b>248</b> IJN aircraft lost</span>
+            <span><b>1</b> US carrier (Yorktown) lost</span>
+          </div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-date">17 AUG &amp; 14 OCT 1943 — GERMANY</div>
+          <h4>Schweinfurt — The Cost of Day Bombing</h4>
+          <p>Two unescorted Eighth Air Force raids on the German ball-bearing industry lose 60 and then 77 B-17s in a single day apiece. Daylight precision bombing without long-range escort is suspended.</p>
+        </div>
+        <div class="tl-event major">
+          <div class="tl-date">06 JUN 1944 — NORMANDY</div>
+          <h4>Operation Overlord — Air Cover for D-Day</h4>
+          <p>Some 11,500 Allied aircraft — Mustangs, Spitfires, Typhoons, P-47s, B-26s, gliders and tugs — fly more than 14,000 sorties over the Normandy beachhead. The Luftwaffe manages roughly 250.</p>
+        </div>
+        <div class="tl-event">
+          <div class="tl-date">JUL 1944 — GERMANY</div>
+          <h4>Me 262 Enters Service</h4>
+          <p>Erprobungskommando 262 receives its first jets. The Schwalbe — 870 km/h, four 30mm cannon — arrives too late and in too few numbers to alter the war's course.</p>
+        </div>
+        <div class="tl-event">
+          <div class="tl-date">13–15 FEB 1945 — DRESDEN</div>
+          <h4>Dresden Firestorm</h4>
+          <p>796 RAF Lancasters and 311 USAAF B-17s drop 3,900 tons of bombs in the most destructive single conventional raid of the European war.</p>
+        </div>
+        <div class="tl-event">
+          <div class="tl-date">06 + 09 AUG 1945 — JAPAN</div>
+          <h4>Hiroshima &amp; Nagasaki</h4>
+          <p>B-29 Superfortresses <i>Enola Gay</i> and <i>Bockscar</i> drop atomic weapons on Hiroshima and Nagasaki. Imperial Japan surrenders six days later, ending the war in the Pacific.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARE ============ -->
+  <section id="compare">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">05</div>
+        <div class="section-title">
+          <div class="kicker">PART FIVE / COMPARATIVE ANALYSIS</div>
+          <h2>Spitfire vs Bf 109<br/>Eight Marks of Argument</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 97 — 102<br/>
+          DATA: SUMMER 1943<br/>SPIT IX VS 109 G-6
+        </div>
+      </div>
+
+      <div class="compare-wrap">
+        <div class="compare-side">
+          <div class="compare-flag">UK · ROYAL AIR FORCE</div>
+          <div class="compare-name">Spitfire Mk. IX</div>
+          <div class="compare-sub">Supermarine, Castle Bromwich · 1942</div>
+          <div class="compare-sil">
+            <svg viewBox="0 0 280 90"><path d="M10 45 L40 42 L210 42 L260 47 L270 50 L260 53 L210 53 L40 53 Z"/><path d="M90 45 C85 10, 130 5, 150 15 C160 30, 160 45, 160 50 C160 55, 160 75, 150 80 C130 85, 85 80, 90 50 Z"/><path d="M230 45 C245 30, 265 30, 270 42 L270 47 Z"/><path d="M230 53 C245 65, 265 65, 270 53 L270 51 Z"/></svg>
+          </div>
+          <div class="stat-row"><span class="lbl">Max Speed</span><span class="bar" style="--w:88%"></span><span class="val">657</span></div>
+          <div class="stat-row"><span class="lbl">Climb Rate</span><span class="bar" style="--w:92%"></span><span class="val">23.4</span></div>
+          <div class="stat-row"><span class="lbl">Service Ceiling</span><span class="bar" style="--w:96%"></span><span class="val">13,100</span></div>
+          <div class="stat-row"><span class="lbl">Roll Rate</span><span class="bar" style="--w:60%"></span><span class="val">68°/s</span></div>
+          <div class="stat-row"><span class="lbl">Turn Radius</span><span class="bar" style="--w:90%"></span><span class="val">tight</span></div>
+          <div class="stat-row"><span class="lbl">Range</span><span class="bar" style="--w:50%"></span><span class="val">700 km</span></div>
+          <div class="stat-row"><span class="lbl">Firepower</span><span class="bar" style="--w:72%"></span><span class="val">2×20 + 4×.303</span></div>
+        </div>
+        <div class="compare-side right">
+          <div class="compare-flag">DE · LUFTWAFFE</div>
+          <div class="compare-name">Bf 109 G-6</div>
+          <div class="compare-sub">Messerschmitt, Augsburg · 1943</div>
+          <div class="compare-sil">
+            <svg viewBox="0 0 280 90"><path d="M10 46 L42 42 L208 42 L258 48 L270 50 L258 52 L208 53 L42 53 Z"/><polygon points="84,46 84,12 168,12 168,46 168,78 84,78"/><polygon points="228,45 268,30 272,40 272,50 272,60 268,70 228,53"/></svg>
+          </div>
+          <div class="stat-row"><span class="lbl">Max Speed</span><span class="bar" style="--w:84%"></span><span class="val">630</span></div>
+          <div class="stat-row"><span class="lbl">Climb Rate</span><span class="bar" style="--w:88%"></span><span class="val">22.0</span></div>
+          <div class="stat-row"><span class="lbl">Service Ceiling</span><span class="bar" style="--w:92%"></span><span class="val">12,500</span></div>
+          <div class="stat-row"><span class="lbl">Roll Rate</span><span class="bar" style="--w:66%"></span><span class="val">75°/s</span></div>
+          <div class="stat-row"><span class="lbl">Turn Radius</span><span class="bar" style="--w:74%"></span><span class="val">tight</span></div>
+          <div class="stat-row"><span class="lbl">Range</span><span class="bar" style="--w:62%"></span><span class="val">850 km</span></div>
+          <div class="stat-row"><span class="lbl">Firepower</span><span class="bar" style="--w:88%"></span><span class="val">1×30 + 2×13mm</span></div>
+        </div>
+        <div class="verdict">By the summer of 1943 the Spitfire IX had clawed back the altitude advantage the Fw 190 had stolen the year before; the Bf 109 G-6 still held the edge in dive and concentrated firepower, but the men on either side of the Channel could agree the two aircraft were the closest-matched fighters of the war.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MUSEUMS ============ -->
+  <section id="museums" style="background:var(--paper-2)">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">06</div>
+        <div class="section-title">
+          <div class="kicker">PART SIX / WHERE TO SEE THEM</div>
+          <h2>Living Aircraft &amp;<br/>Airworthy Examples</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 103 — 118<br/>
+          DIRECTORY 2026<br/>
+          12 MAJOR INSTITUTIONS
+        </div>
+      </div>
+
+      <div class="museums">
+        <article class="museum">
+          <div class="museum-region"><span>EUROPE — UK</span><span>★★★★★</span></div>
+          <h4>Imperial War Museum Duxford</h4>
+          <div class="loc">Cambridgeshire, England · CB22 4QR</div>
+          <p>The largest collection of historic military aircraft in Europe, on the original RAF station from which Douglas Bader's wing flew during the Battle of Britain. Home to the famous "Sally B" — the only airworthy B-17 in Europe.</p>
+          <div class="holdings"><b>Holds:</b> Spitfire (multiple), Hurricane, Lancaster, B-17, P-51, Bf 109 G, Avro Anson, T-6 Texan</div>
+        </article>
+        <article class="museum">
+          <div class="museum-region"><span>NORTH AMERICA — USA</span><span>★★★★★</span></div>
+          <h4>National Museum of the USAF</h4>
+          <div class="loc">Dayton, Ohio · Wright-Patterson AFB</div>
+          <p>The world's largest and oldest military aviation museum. Four enormous hangars house everything from a B-17F to the only surviving Bockscar — the B-29 that dropped the second atomic bomb.</p>
+          <div class="holdings"><b>Holds:</b> Bockscar, Memphis Belle, P-51, P-38, P-47, B-24, B-25, Me 262, Fw 190</div>
+        </article>
+        <article class="museum">
+          <div class="museum-region"><span>NORTH AMERICA — USA</span><span>★★★★☆</span></div>
+          <h4>Planes of Fame Air Museum</h4>
+          <div class="loc">Chino, California · KCNO</div>
+          <p>Concentration of airworthy warbirds with one of the highest flight-hour records in the world. Hosts the only flying A6M Zero with its original Sakae engine.</p>
+          <div class="holdings"><b>Holds:</b> A6M5 Zero (flying), P-51D, P-38, P-47, F4U Corsair, Yak-3</div>
+        </article>
+        <article class="museum">
+          <div class="museum-region"><span>EUROPE — UK</span><span>★★★★☆</span></div>
+          <h4>RAF Museum London &amp; Cosford</h4>
+          <div class="loc">Hendon &amp; Cosford · England</div>
+          <p>The official aircraft museum of the Royal Air Force. Hendon's Battle of Britain hall is the most complete collection of 1940 combatants in existence — including the only surviving Boulton-Paul Defiant.</p>
+          <div class="holdings"><b>Holds:</b> Defiant, Spitfire I, Hurricane I, Lancaster, Halifax, Mosquito, Bf 109 E, Ju 87, He 111</div>
+        </article>
+        <article class="museum">
+          <div class="museum-region"><span>OCEANIA — AUSTRALIA</span><span>★★★★☆</span></div>
+          <h4>Australian War Memorial — ANZAC Hall</h4>
+          <div class="loc">Canberra, ACT</div>
+          <p>"G for George," the Lancaster that flew 90 sorties with No. 460 Sqn RAAF, hangs above visitors here. Home also to a Japanese Ki-43 Hayabusa and the famous Mephisto A7V tank.</p>
+          <div class="holdings"><b>Holds:</b> Lancaster G-George, Spitfire VIII, Ki-43, Mosquito, Beaufort</div>
+        </article>
+        <article class="museum">
+          <div class="museum-region"><span>EUROPE — GERMANY</span><span>★★★★☆</span></div>
+          <h4>Deutsches Technikmuseum</h4>
+          <div class="loc">Berlin, Germany</div>
+          <p>The only original Ju 87 Stuka in Europe — recovered from the Aegean Sea — and a comprehensive Luftwaffe collection including a rare Ar 96 and Bü 181.</p>
+          <div class="holdings"><b>Holds:</b> Ju 87, Junkers Ju 52, Bf 110, Arado Ar 96, He 162</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ READING ROOM ============ -->
+  <section id="reading">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">07</div>
+        <div class="section-title">
+          <div class="kicker">PART SEVEN / THE READING ROOM</div>
+          <h2>Required Reading<br/>&amp; Field Dispatches</h2>
+        </div>
+        <div class="section-meta">
+          PAGE 119 — 130<br/>
+          CURATED BY EDITORIAL<br/>BOARD · 2026
+        </div>
+      </div>
+
+      <div class="reading">
+        <div class="reading-list">
+          <div class="book">
+            <div class="idx">001</div>
+            <div class="info">
+              <h5>The First and the Last</h5>
+              <span>Adolf Galland · A Luftwaffe ace's memoir</span>
+            </div>
+            <div class="yr">1953</div>
+          </div>
+          <div class="book">
+            <div class="idx">002</div>
+            <div class="info">
+              <h5>Spitfire: A Test Pilot's Story</h5>
+              <span>Jeffrey Quill · Inside the airframe</span>
+            </div>
+            <div class="yr">1983</div>
+          </div>
+          <div class="book">
+            <div class="idx">003</div>
+            <div class="info">
+              <h5>Bomber Command</h5>
+              <span>Max Hastings · The strategic campaign in full</span>
+            </div>
+            <div class="yr">1979</div>
+          </div>
+          <div class="book">
+            <div class="idx">004</div>
+            <div class="info">
+              <h5>Wing Leader</h5>
+              <span>Johnnie Johnson · The RAF's top ace</span>
+            </div>
+            <div class="yr">1956</div>
+          </div>
+          <div class="book">
+            <div class="idx">005</div>
+            <div class="info">
+              <h5>Samurai!</h5>
+              <span>Saburo Sakai · IJN fighter pilot's account</span>
+            </div>
+            <div class="yr">1957</div>
+          </div>
+          <div class="book">
+            <div class="idx">006</div>
+            <div class="info">
+              <h5>The Forgotten Soldier</h5>
+              <span>Guy Sajer · The Eastern Front from below</span>
+            </div>
+            <div class="yr">1967</div>
+          </div>
+          <div class="book">
+            <div class="idx">007</div>
+            <div class="info">
+              <h5>Masters of the Air</h5>
+              <span>Donald L. Miller · The Eighth Air Force</span>
+            </div>
+            <div class="yr">2006</div>
+          </div>
+          <div class="book">
+            <div class="idx">008</div>
+            <div class="info">
+              <h5>Black Cross / Red Star (Vols I-IV)</h5>
+              <span>Bergström &amp; Mikhailov · The air war in the East</span>
+            </div>
+            <div class="yr">2000</div>
+          </div>
+        </div>
+
+        <aside class="quote-card">
+          <blockquote>Never in the field of human conflict was so much owed by so many to so few.</blockquote>
+          <cite><b>Winston Churchill</b>House of Commons · 20 August 1940</cite>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GLOSSARY ============ -->
+  <section id="glossary" style="background:var(--paper-2)">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-num">08</div>
+        <div class="section-title">
+          <div class="kicker">PART EIGHT / FIELD GLOSSARY</div>
+          <h2>The Language<br/>of the Cockpit</h2>
+        </div>
+        <div class="section-meta">
+          APPENDIX A<br/>
+          24 ENTRIES<br/>
+          REVISED Q4 2025
+        </div>
+      </div>
+
+      <dl class="glossary">
+        <div class="term"><dt>Angels <small>RAF</small></dt><dd>Altitude expressed in thousands of feet. "Angels Two-Zero" — twenty thousand feet.</dd></div>
+        <div class="term"><dt>Bandit <small>USAAF</small></dt><dd>A confirmed hostile aircraft, as opposed to a "bogey" (unidentified).</dd></div>
+        <div class="term"><dt>Bingo Fuel</dt><dd>Minimum fuel needed to reach base. Past bingo and you are coming home cold.</dd></div>
+        <div class="term"><dt>Bounce</dt><dd>Surprise attack from above and astern. The vast majority of WWII fighter kills were bounces.</dd></div>
+        <div class="term"><dt>Box Formation <small>USAAF</small></dt><dd>The defensive combat box adopted by B-17 groups — overlapping fields of .50-cal fire across an entire formation.</dd></div>
+        <div class="term"><dt>Buzz Number</dt><dd>The two- or three-digit identifier painted on USAAF aircraft for ground-control identification.</dd></div>
+        <div class="term"><dt>Chandelle</dt><dd>An ascending 180° climbing turn to reverse direction with maximum altitude gain.</dd></div>
+        <div class="term"><dt>Drop Tank</dt><dd>External jettisonable fuel tank. Without them the P-51 could not reach Berlin.</dd></div>
+        <div class="term"><dt>Erks <small>RAF</small></dt><dd>Ground crew. From "AC" — aircraftman, the lowest RAF rank — pronounced "ack."</dd></div>
+        <div class="term"><dt>Experte <small>LW</small></dt><dd>Luftwaffe term for an ace pilot. Required at least five confirmed kills.</dd></div>
+        <div class="term"><dt>Finger Four</dt><dd>The "Schwarm" formation — four aircraft in pairs, staggered like fingertips. Werner Mölders' lasting tactical contribution.</dd></div>
+        <div class="term"><dt>Gee &amp; Oboe</dt><dd>British radio-navigation systems that let RAF Bomber Command find its targets at night.</dd></div>
+        <div class="term"><dt>Hedgehopping</dt><dd>Low-level flight at the height of the trees and hedgerows. Suicidal but effective.</dd></div>
+        <div class="term"><dt>Immelmann</dt><dd>Half-loop terminating in a half-roll. Reverses direction with altitude gain. Named for Max Immelmann.</dd></div>
+        <div class="term"><dt>Jericho-Trompete</dt><dd>The wind-driven sirens fitted to early Stukas to terrify those below.</dd></div>
+        <div class="term"><dt>Kanalkampf</dt><dd>"Channel Battle" — the opening phase of the Battle of Britain, July 1940.</dd></div>
+        <div class="term"><dt>Mae West</dt><dd>The inflatable life vest. Named for the actress for reasons obvious on inflation.</dd></div>
+        <div class="term"><dt>Pancake</dt><dd>Land. From the desired flat attitude on touchdown.</dd></div>
+        <div class="term"><dt>Roundel</dt><dd>The circular national insignia on Allied aircraft. The RAF's blue-white-red was the original.</dd></div>
+        <div class="term"><dt>Schräge Musik</dt><dd>"Slanted music" — upward-firing cannon fitted to Luftwaffe night-fighters to attack RAF heavies from below.</dd></div>
+        <div class="term"><dt>Split-S</dt><dd>Half-roll inverted into a half-loop downward. Rapid altitude loss with reversal of direction.</dd></div>
+        <div class="term"><dt>Tally-Ho <small>RAF</small></dt><dd>Visual contact with the enemy made; engaging.</dd></div>
+        <div class="term"><dt>Vic</dt><dd>Three-aircraft V formation. Pretty in 1939, lethal by 1940 — abandoned after Dunkirk.</dd></div>
+        <div class="term"><dt>Wilco</dt><dd>"Will comply." Standard RAF/USAAF radio acknowledgement.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ ENLIST ============ -->
+  <section id="enlist" class="enlist">
+    <div class="enlist-grid">
+      <div>
+        <h2>Enlist in the<br/><em>Squadron Roster.</em></h2>
+        <p>One dispatch each Sunday morning. Restoration news, dossiers on lesser-known airframes, museum acquisitions, airshow schedules and the occasional auction tip. No ads, no spam, no spotter-talk. Twenty-four thousand readers across forty-seven countries.</p>
+        <p style="font-family:'JetBrains Mono', monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);max-width:540px">— Currently assembling Issue No. 1,217 —</p>
+      </div>
+      <form class="form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Roster Updated · Welcome'">
+        <div class="row">
+          <div>
+            <label>Surname</label>
+            <input type="text" placeholder="Bader" required>
+          </div>
+          <div>
+            <label>Initial</label>
+            <input type="text" placeholder="D.R.S." required>
+          </div>
+        </div>
+        <label>Field Address</label>
+        <input type="email" placeholder="callsign@station.org" required>
+        <label>Squadron Preference</label>
+        <select>
+          <option>RAF — Fighter Command</option>
+          <option>RAF — Bomber Command</option>
+          <option>USAAF — Eighth Air Force</option>
+          <option>USAAF — Pacific</option>
+          <option>Luftwaffe</option>
+          <option>VVS / Soviet Air Force</option>
+          <option>IJN / IJAAF</option>
+          <option>Civilian Restoration</option>
+        </select>
+        <button type="submit">Sign the Roster →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="vec">VECTOR 09</div>
+        <p>An independent, advertising-free archive maintained by enthusiasts, restorers and historians for the aircraft of 1939–1945. Established 2003. We do not glorify the war; we remember the machines and the people who flew them.</p>
+      </div>
+      <div class="foot-col">
+        <h6>Archives</h6>
+        <a href="#dossiers">Aircraft Dossiers</a>
+        <a href="#theatres">Theatres of Operation</a>
+        <a href="#timeline">Operational Chronology</a>
+        <a href="#glossary">Field Glossary</a>
+      </div>
+      <div class="foot-col">
+        <h6>Community</h6>
+        <a href="#aces">Notable Pilots</a>
+        <a href="#museums">Museum Directory</a>
+        <a href="#reading">Reading Room</a>
+        <a href="#enlist">Squadron Roster</a>
+      </div>
+      <div class="foot-col">
+        <h6>Channels</h6>
+        <a href="#">Forum &amp; Workshop</a>
+        <a href="#">Restoration Log</a>
+        <a href="#">Airshow Calendar</a>
+        <a href="#">Photo Archive</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2003 — 2026 · Vector 09 Editorial Trust · All rights reserved</span>
+      <span>Lest we forget <span class="roundel"></span> Per ardua ad astra</span>
+      <span>Built in tribute · Not in glorification</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // gentle scroll-reveal for the dossier cards
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  // staggered reveal delay
+  document.querySelectorAll('.dossiers .reveal').forEach((el,i)=>{
+    el.style.transitionDelay = (i%6 * 80) + 'ms';
+  });
+</script>
+
+</body>
+</html>
