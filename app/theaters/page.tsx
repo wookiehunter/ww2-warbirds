@@ -13,69 +13,91 @@ type Theatre = {
   summary: string;
   body: string[];
   iconicAircraft: string[]; // slugs
+  /**
+   * Wikimedia Special:FilePath URL — tried first.
+   * Falls through to wikiSlug on failure.
+   */
   image: string;
+  /**
+   * Wikipedia article slug used by SafeImage as a reliable fallback.
+   * https://en.wikipedia.org/api/rest_v1/page/summary/<wikiSlug>
+   */
+  wikiSlug: string;
 };
+
+const wm = (file: string) =>
+  `https://commons.wikimedia.org/wiki/Special:FilePath/${file}?width=1400`;
 
 const theatres: Theatre[] = [
   {
     name: 'Battle of Britain & the West',
     years: '1940 – 1945',
-    summary: 'The crucial defensive air battle over southern England, the strategic bombing offensive against Germany, and the tactical air war over occupied Europe.',
+    summary:
+      'The crucial defensive air battle over southern England, the strategic bombing offensive against Germany, and the tactical air war over occupied Europe.',
     body: [
-      'From the summer of 1940, when Fighter Command stood alone against the Luftwaffe, to the final operations over the Reich in 1945, the air war over Western Europe was continuously contested. Radar and the integrated Dowding System turned Britain\'s air defences into the most sophisticated in the world.',
-      'The strategic bombing campaign — British by night, American by day — brought the war home to Germany on an unprecedented scale. Its effectiveness remains debated; its cost, for both crews and civilians, was staggering. Over 55,000 RAF Bomber Command aircrew were killed.',
+      "From the summer of 1940, when Fighter Command stood alone against the Luftwaffe, to the final operations over the Reich in 1945, the air war over Western Europe was continuously contested. Radar and the integrated Dowding System turned Britain's air defences into the most sophisticated in the world.",
+      "The strategic bombing campaign — British by night, American by day — brought the war home to Germany on an unprecedented scale. Its effectiveness remains debated; its cost, for both crews and civilians, was staggering. Over 55,000 RAF Bomber Command aircrew were killed.",
       'The air war over the Channel and occupied Europe also produced the first jet combat, the first guided weapons, the first strategic cruise missiles, and a generation of tactical air doctrines that have shaped every air campaign since.',
     ],
     iconicAircraft: ['supermarine-spitfire', 'hawker-hurricane', 'messerschmitt-bf-109', 'avro-lancaster', 'b-17-flying-fortress', 'p-51-mustang'],
-    image: '/api/img?file=Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg&w=1200',
+    image: wm('Supermarine_Spitfire_Mark_Is_of_No._610_Squadron_RAF_based_at_Biggin_Hill%2C_flying_in_formation_July_1940._CH740.jpg'),
+    wikiSlug: 'Battle_of_Britain',
   },
   {
     name: 'Eastern Front',
     years: '1941 – 1945',
-    summary: 'The largest and bloodiest theatre of the air war — a sprawling tactical contest across 3,000 km of steppe, forest, and ruined city.',
+    summary:
+      'The largest and bloodiest theatre of the air war — a sprawling tactical contest across 3,000 km of steppe, forest, and ruined city.',
     body: [
       'The air war on the Eastern Front was dominated by tactical operations in support of enormous land armies. Strategic bombing played a minor role; ground-attack and battlefield air superiority were everything.',
       'The Luftwaffe began the campaign with superb aircraft and experienced crews, and racked up the highest scores in fighter history against initially disorganised Soviet forces. Ivan Kozhedub, the top-scoring Allied ace, flew La-5 and La-7 fighters; Erich Hartmann, the top-scoring ace in history, flew Bf 109s against them.',
       'Soviet industrial output — aided by Lend-Lease aircraft including Hurricanes, Kittyhawks, A-20s, and B-25s — eventually overwhelmed the Luftwaffe. By 1944 the VVS held numerical and qualitative superiority; by 1945 it was an instrument of conquest.',
     ],
     iconicAircraft: ['il-2-sturmovik', 'yak-3', 'la-5', 'junkers-ju-87-stuka', 'messerschmitt-bf-109', 'pe-2'],
-    image: '/api/img?file=Il-2_Sturmovik.jpg&w=1200',
+    image: wm('Ilyushin_Il-2_in_flight.jpg'),
+    wikiSlug: 'Ilyushin_Il-2',
   },
   {
     name: 'Pacific',
     years: '1941 – 1945',
-    summary: 'A war fought across vast oceanic distances, decided by carrier aviation and ended by strategic bombers.',
+    summary:
+      'A war fought across vast oceanic distances, decided by carrier aviation and ended by strategic bombers.',
     body: [
       'The Pacific war was, above all, a naval air war. The carrier battles of 1942 — Coral Sea, Midway, Eastern Solomons, Santa Cruz — established aircraft as the decisive arm of modern sea power and sent battleships to permanent secondary status.',
-      'The Imperial Japanese Navy began the war with superbly trained pilots flying the long-ranged A6M Zero. Its cadre of veteran aircrew could not be replaced, however; attrition through Guadalcanal and the Solomons bled the Navy Air Force white, and by 1944 the Americans had overwhelming superiority in numbers, training, and aircraft quality.',
+      "The Imperial Japanese Navy began the war with superbly trained pilots flying the long-ranged A6M Zero. Its cadre of veteran aircrew could not be replaced, however; attrition through Guadalcanal and the Solomons bled the Navy Air Force white, and by 1944 the Americans had overwhelming superiority in numbers, training, and aircraft quality.",
       'The strategic bombing campaign by B-29s from the Marianas devastated Japanese cities. The final act — the atomic strikes at Hiroshima and Nagasaki — brought the war to an abrupt end and opened a new and darker age.',
     ],
     iconicAircraft: ['mitsubishi-a6m-zero', 'f6f-hellcat', 'f4u-corsair', 'sbd-dauntless', 'b-29-superfortress', 'p-38-lightning'],
-    image: '/api/img?file=F6F-3_Hellcat_VF-5_USN.jpg&w=1200',
+    image: wm('Battle_of_Midway_June_1942.jpg'),
+    wikiSlug: 'Battle_of_Midway',
   },
   {
     name: 'Mediterranean & North Africa',
     years: '1940 – 1945',
-    summary: 'From Malta to Tunis to Monte Cassino — a seesaw air war across sea, desert, and mountain.',
+    summary:
+      'From Malta to Tunis to Monte Cassino — a seesaw air war across sea, desert, and mountain.',
     body: [
       'The Mediterranean was the proving ground for two Italian services that had ambition but struggled with obsolete aircraft. The Regia Aeronautica fielded capable designs like the Macchi C.202 and 205, but never in sufficient numbers.',
-      'Malta became one of the most bombed places on earth, defended first by a handful of Sea Gladiator biplanes, then by Hurricanes, and finally by Spitfires flown in from carriers. Its survival kept the supply lines to Rommel\'s Afrika Korps under constant threat.',
+      "Malta became one of the most bombed places on earth, defended first by a handful of Sea Gladiator biplanes, then by Hurricanes, and finally by Spitfires flown in from carriers. Its survival kept the supply lines to Rommel's Afrika Korps under constant threat.",
       'Operations ranged from the desert air war in Libya and Egypt — where P-40s and Hurricanes hunted the Stuka — through the Tunisian campaign, the invasion of Italy, and the long grinding air war up the peninsula. The MATAF and Desert Air Force pioneered many of the tactical air-support doctrines used in Normandy.',
     ],
     iconicAircraft: ['p-40-warhawk', 'macchi-c202-folgore', 'supermarine-spitfire', 'junkers-ju-87-stuka', 'b-24-liberator'],
-    image: '/api/img?file=Curtiss_P-40E_Warhawk_USAF.jpg&w=1200',
+    image: wm('Curtiss_P-40_Warhawks_of_the_23rd_Fighter_Group.jpg'),
+    wikiSlug: 'Western_Desert_campaign',
   },
   {
     name: 'Battle of the Atlantic',
     years: '1939 – 1945',
-    summary: 'The convoy war — and the aircraft that finally closed the Mid-Atlantic Gap.',
+    summary:
+      'The convoy war — and the aircraft that finally closed the Mid-Atlantic Gap.',
     body: [
-      'The Atlantic campaign was Britain\'s most dangerous moment: without the convoys from North America, the United Kingdom could not fight on. German U-boats came within weeks of cutting the supply line in 1942 and 1943.',
+      "The Atlantic campaign was Britain's most dangerous moment: without the convoys from North America, the United Kingdom could not fight on. German U-boats came within weeks of cutting the supply line in 1942 and 1943.",
       'Air cover was the decisive factor. A U-boat submerged to avoid aircraft could not keep up with a convoy; one caught on the surface was extremely vulnerable. Shore-based maritime patrol by Sunderlands, Catalinas, and Liberators, combined with escort carriers and their Swordfish and Wildcats, transformed the odds.',
       'The closure of the Mid-Atlantic Gap by Very Long Range (VLR) Liberators in early 1943 — flying from Iceland and Newfoundland — marked the turning point. By "Black May" 1943, Dönitz was forced to withdraw his wolfpacks from the central Atlantic. The shipping lanes were safe.',
     ],
     iconicAircraft: ['b-24-liberator', 'tbf-avenger'],
-    image: '/api/img?file=Consolidated_B-24_Liberator.jpg&w=1200',
+    image: wm('Consolidated_B-24D-CO_Liberator_41-23728_USAAF.jpg'),
+    wikiSlug: 'Battle_of_the_Atlantic',
   },
 ];
 
@@ -104,7 +126,13 @@ export default function Theatres() {
               <div className="grid lg:grid-cols-2 gap-10 items-start">
                 <div className={i % 2 ? 'lg:order-2' : ''}>
                   <div className="aspect-[4/3] border border-olive-700/60 overflow-hidden corner-mark">
-                    <SafeImage src={t.image} alt="" className="w-full h-full object-cover img-treatment" />
+                    <SafeImage
+                      src={t.image}
+                      alt={t.name}
+                      wikiSlug={t.wikiSlug}
+                      className="w-full h-full object-cover img-treatment"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <div className={i % 2 ? 'lg:order-1' : ''}>
