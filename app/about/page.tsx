@@ -13,7 +13,7 @@ export default function AboutPage() {
       <section className="relative border-b border-olive-800/60 bg-ink-950">
         <div className="absolute inset-0 opacity-20">
           <SafeImage
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/B-17_formation_over_Schweinfurt,_17_August_1943.jpg?width=1600"
+            src="/api/img?file=B-17_formation_over_Schweinfurt,_17_August_1943.jpg&w=1200"
             alt=""
             className="w-full h-full object-cover img-treatment"
             loading="eager"

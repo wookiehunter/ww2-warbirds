@@ -2,19 +2,22 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'upload.wikimedia.org',
-        pathname: '/**',
-      },
+      // Wikimedia Commons Special:FilePath redirector
       {
         protocol: 'https',
         hostname: 'commons.wikimedia.org',
         pathname: '/**',
       },
+      // Wikimedia CDN — where Special:FilePath ultimately resolves to.
+      // The imageinfo API returns direct thumbnail URLs on this host.
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        pathname: '/**',
+      },
     ],
-    // Using unoptimized so the site works without a running image optimizer
-    // and also so replaced images from any source load cleanly.
+    // unoptimized=true keeps things simple: no built-in image optimizer needed,
+    // plain <img> tags work without restriction, and any CDN URL renders cleanly.
     unoptimized: true,
   },
 };

@@ -21,6 +21,8 @@ export type Aircraft = {
   theaters: string[];
   image: string;
   imageCredit: string;
+  /** Wikipedia article slug used to fetch a confirmed thumbnail via the Wikipedia REST API. */
+  wikiSlug: string;
   tags: string[];
 };
 
@@ -28,7 +30,7 @@ export type Aircraft = {
 // To replace an image, swap the filename in the URL with a different
 // Commons file (or any URL — remotePatterns in next.config.js allows wildcards).
 const wm = (file: string) =>
-  `https://commons.wikimedia.org/wiki/Special:FilePath/${file}?width=1200`;
+  `/api/img?file=${encodeURIComponent(file)}&w=1200`;
 
 export const aircraft: Aircraft[] = [
   // ──────────────── UNITED KINGDOM ────────────────
@@ -60,6 +62,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Mediterranean', 'North Africa', 'Pacific', 'Burma'],
     image: wm('Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg'),
     imageCredit: 'Royal Air Force official photographer / IWM — Public Domain',
+    wikiSlug: 'Supermarine_Spitfire',
     tags: ['Fighter', 'Iconic', 'RAF', 'Battle of Britain'],
   },
   {
@@ -90,6 +93,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Mediterranean', 'North Africa', 'Eastern Front', 'Burma'],
     image: wm('Hawker_Hurricane_Mk_I_of_No._85_Squadron_RAF_in_flight_October_1940.jpg'),
     imageCredit: 'Royal Air Force official photographer / IWM — Public Domain',
+    wikiSlug: 'Hawker_Hurricane',
     tags: ['Fighter', 'RAF', 'Battle of Britain', 'Ground-attack'],
   },
   {
@@ -120,6 +124,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe — strategic bombing'],
     image: wm('Avro_Lancaster_B_I_PA474.jpg'),
     imageCredit: 'Wikimedia Commons — CC BY-SA',
+    wikiSlug: 'Avro_Lancaster',
     tags: ['Bomber', 'RAF', 'Strategic bombing', 'Heavy'],
   },
   {
@@ -150,6 +155,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Mediterranean', 'Pacific'],
     image: wm('De_Havilland_DH-98_Mosquito_B_XVI_ML963.jpg'),
     imageCredit: 'Royal Air Force / IWM — Public Domain',
+    wikiSlug: 'De_Havilland_Mosquito',
     tags: ['Multi-role', 'RAF', 'Fast bomber', 'Night fighter'],
   },
   {
@@ -180,6 +186,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe'],
     image: wm('Hawker_Typhoon_Mk_IB_MN601_of_No._198_Squadron_RAF.jpg'),
     imageCredit: 'Royal Air Force / IWM — Public Domain',
+    wikiSlug: 'Hawker_Typhoon',
     tags: ['Fighter-bomber', 'RAF', 'Ground-attack', 'Rockets'],
   },
 
@@ -212,6 +219,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Mediterranean', 'Pacific', 'China-Burma-India'],
     image: wm('North_American_P-51D-5NA_Mustang_-_USAF.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'North_American_P-51_Mustang',
     tags: ['Fighter', 'Escort', 'USAAF', 'Long range'],
   },
   {
@@ -242,6 +250,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Mediterranean', 'Pacific'],
     image: wm('P-47D_23_Zemke.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'Republic_P-47_Thunderbolt',
     tags: ['Fighter', 'Ground-attack', 'USAAF', 'Rugged'],
   },
   {
@@ -272,6 +281,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'Mediterranean', 'Western Europe', 'China-Burma-India'],
     image: wm('Lockheed_P-38_Lightning_USAF.JPG'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'Lockheed_P-38_Lightning',
     tags: ['Fighter', 'Twin-engine', 'USAAF', 'Pacific'],
   },
   {
@@ -302,6 +312,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['North Africa', 'Pacific', 'China-Burma-India', 'Eastern Front'],
     image: wm('Curtiss_P-40E_Warhawk_USAF.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'Curtiss_P-40_Warhawk',
     tags: ['Fighter', 'USAAF', 'Flying Tigers'],
   },
   {
@@ -332,6 +343,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe — strategic bombing', 'Pacific (early war)'],
     image: wm('Boeing_B-17E_Flying_Fortress.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'Boeing_B-17_Flying_Fortress',
     tags: ['Bomber', 'USAAF', 'Strategic bombing', 'Heavy'],
   },
   {
@@ -362,6 +374,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Mediterranean', 'Pacific', 'Atlantic'],
     image: wm('Consolidated_B-24_Liberator.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'Consolidated_B-24_Liberator',
     tags: ['Bomber', 'USAAF', 'Strategic bombing', 'Maritime patrol'],
   },
   {
@@ -392,6 +405,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific — strategic bombing of Japan'],
     image: wm('Boeing_B-29_Superfortress.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'Boeing_B-29_Superfortress',
     tags: ['Bomber', 'USAAF', 'Strategic bombing', 'Atomic'],
   },
   {
@@ -422,6 +436,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'Western Europe', 'Mediterranean', 'China-Burma-India'],
     image: wm('North_American_B-25_Mitchell_USAF.jpg'),
     imageCredit: 'USAAF — Public Domain',
+    wikiSlug: 'North_American_B-25_Mitchell',
     tags: ['Bomber', 'USAAF', 'Medium bomber'],
   },
   {
@@ -452,6 +467,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific'],
     image: wm('F4U-1A_Corsair_VF-17.jpg'),
     imageCredit: 'US Navy — Public Domain',
+    wikiSlug: 'Vought_F4U_Corsair',
     tags: ['Fighter', 'Carrier', 'USN/USMC', 'Pacific'],
   },
   {
@@ -482,6 +498,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific'],
     image: wm('F6F-3_Hellcat_VF-5_USN.jpg'),
     imageCredit: 'US Navy — Public Domain',
+    wikiSlug: 'Grumman_F6F_Hellcat',
     tags: ['Fighter', 'Carrier', 'USN', 'Pacific'],
   },
   {
@@ -512,6 +529,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific'],
     image: wm('Douglas_SBD-3_Dauntless.jpg'),
     imageCredit: 'US Navy — Public Domain',
+    wikiSlug: 'Douglas_SBD_Dauntless',
     tags: ['Dive bomber', 'Carrier', 'USN', 'Pacific'],
   },
   {
@@ -542,6 +560,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'Atlantic'],
     image: wm('Grumman_TBF-1_Avenger_USN.jpg'),
     imageCredit: 'US Navy — Public Domain',
+    wikiSlug: 'Grumman_TBF_Avenger',
     tags: ['Torpedo bomber', 'Carrier', 'USN', 'Pacific'],
   },
 
@@ -574,6 +593,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Eastern Front'],
     image: wm('Yakovlev_Yak-3.jpg'),
     imageCredit: 'Wikimedia Commons — CC BY-SA',
+    wikiSlug: 'Yakovlev_Yak-3',
     tags: ['Fighter', 'Soviet', 'Eastern Front'],
   },
   {
@@ -604,6 +624,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Eastern Front'],
     image: wm('Il-2_Sturmovik.jpg'),
     imageCredit: 'Wikimedia Commons — Public Domain',
+    wikiSlug: 'Ilyushin_Il-2',
     tags: ['Ground-attack', 'Soviet', 'Eastern Front', 'Armoured'],
   },
   {
@@ -634,6 +655,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Eastern Front'],
     image: wm('Lavochkin_La-5.jpg'),
     imageCredit: 'Wikimedia Commons — Public Domain',
+    wikiSlug: 'Lavochkin_La-5',
     tags: ['Fighter', 'Soviet', 'Eastern Front'],
   },
   {
@@ -664,6 +686,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Eastern Front'],
     image: wm('Petlyakov_Pe-2.jpg'),
     imageCredit: 'Wikimedia Commons — Public Domain',
+    wikiSlug: 'Petlyakov_Pe-2',
     tags: ['Bomber', 'Soviet', 'Eastern Front', 'Medium bomber'],
   },
 
@@ -696,6 +719,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Every theatre of the European war'],
     image: wm('Messerschmitt_Bf_109G.jpg'),
     imageCredit: 'Bundesarchiv — CC BY-SA',
+    wikiSlug: 'Messerschmitt_Bf_109',
     tags: ['Fighter', 'Luftwaffe', 'Iconic'],
   },
   {
@@ -726,6 +750,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Eastern Front', 'Mediterranean'],
     image: wm('Messerschmitt_Bf_110G-4_night_fighter.jpg'),
     imageCredit: 'Bundesarchiv — CC BY-SA',
+    wikiSlug: 'Messerschmitt_Bf_110',
     tags: ['Heavy fighter', 'Night fighter', 'Luftwaffe'],
   },
   {
@@ -756,6 +781,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Western Europe', 'Defence of the Reich'],
     image: wm('Messerschmitt_Me_262_Schwalbe.jpg'),
     imageCredit: 'US National Archives — Public Domain',
+    wikiSlug: 'Messerschmitt_Me_262',
     tags: ['Jet', 'Fighter', 'Luftwaffe', 'Revolutionary'],
   },
   {
@@ -786,6 +812,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Every theatre of the European war'],
     image: wm('Focke-Wulf_Fw_190A.jpg'),
     imageCredit: 'Bundesarchiv — CC BY-SA',
+    wikiSlug: 'Focke-Wulf_Fw_190',
     tags: ['Fighter', 'Luftwaffe', 'Radial'],
   },
   {
@@ -816,6 +843,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Every theatre of the European war'],
     image: wm('Junkers_Ju_87_Stuka.jpg'),
     imageCredit: 'Bundesarchiv — CC BY-SA',
+    wikiSlug: 'Junkers_Ju_87',
     tags: ['Dive bomber', 'Luftwaffe', 'Anti-tank'],
   },
   {
@@ -846,6 +874,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Every theatre of the European war'],
     image: wm('Heinkel_He_111.jpg'),
     imageCredit: 'Bundesarchiv — CC BY-SA',
+    wikiSlug: 'Heinkel_He_111',
     tags: ['Bomber', 'Luftwaffe', 'Medium bomber'],
   },
 
@@ -878,6 +907,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'China'],
     image: wm('A6M3_Zero_N712Z_1.jpg'),
     imageCredit: 'Wikimedia Commons — CC BY-SA',
+    wikiSlug: 'Mitsubishi_A6M_Zero',
     tags: ['Fighter', 'Carrier', 'IJN', 'Pacific', 'Iconic'],
   },
   {
@@ -908,6 +938,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'China-Burma-India'],
     image: wm('Nakajima_Ki-43_Hayabusa.jpg'),
     imageCredit: 'Wikimedia Commons — Public Domain',
+    wikiSlug: 'Nakajima_Ki-43',
     tags: ['Fighter', 'IJA', 'Pacific'],
   },
   {
@@ -938,6 +969,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'Indian Ocean'],
     image: wm('Aichi_D3A_Val.jpg'),
     imageCredit: 'US Navy — Public Domain',
+    wikiSlug: 'Aichi_D3A',
     tags: ['Dive bomber', 'Carrier', 'IJN', 'Pacific'],
   },
   {
@@ -968,6 +1000,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Pacific', 'China'],
     image: wm('Mitsubishi_G4M_Betty.jpg'),
     imageCredit: 'US Navy — Public Domain',
+    wikiSlug: 'Mitsubishi_G4M',
     tags: ['Bomber', 'Torpedo bomber', 'IJN', 'Pacific'],
   },
 
@@ -1000,6 +1033,7 @@ export const aircraft: Aircraft[] = [
     theaters: ['Mediterranean', 'North Africa'],
     image: wm('Macchi_MC.202_Folgore.jpg'),
     imageCredit: 'Wikimedia Commons — Public Domain',
+    wikiSlug: 'Macchi_C.202_Folgore',
     tags: ['Fighter', 'Regia Aeronautica', 'Mediterranean'],
   },
 ];

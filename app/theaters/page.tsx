@@ -27,7 +27,7 @@ const theatres: Theatre[] = [
       'The air war over the Channel and occupied Europe also produced the first jet combat, the first guided weapons, the first strategic cruise missiles, and a generation of tactical air doctrines that have shaped every air campaign since.',
     ],
     iconicAircraft: ['supermarine-spitfire', 'hawker-hurricane', 'messerschmitt-bf-109', 'avro-lancaster', 'b-17-flying-fortress', 'p-51-mustang'],
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg?width=1400',
+    image: '/api/img?file=Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg&w=1200',
   },
   {
     name: 'Eastern Front',
@@ -39,7 +39,7 @@ const theatres: Theatre[] = [
       'Soviet industrial output — aided by Lend-Lease aircraft including Hurricanes, Kittyhawks, A-20s, and B-25s — eventually overwhelmed the Luftwaffe. By 1944 the VVS held numerical and qualitative superiority; by 1945 it was an instrument of conquest.',
     ],
     iconicAircraft: ['il-2-sturmovik', 'yak-3', 'la-5', 'junkers-ju-87-stuka', 'messerschmitt-bf-109', 'pe-2'],
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Il-2_Sturmovik.jpg?width=1400',
+    image: '/api/img?file=Il-2_Sturmovik.jpg&w=1200',
   },
   {
     name: 'Pacific',
@@ -51,7 +51,7 @@ const theatres: Theatre[] = [
       'The strategic bombing campaign by B-29s from the Marianas devastated Japanese cities. The final act — the atomic strikes at Hiroshima and Nagasaki — brought the war to an abrupt end and opened a new and darker age.',
     ],
     iconicAircraft: ['mitsubishi-a6m-zero', 'f6f-hellcat', 'f4u-corsair', 'sbd-dauntless', 'b-29-superfortress', 'p-38-lightning'],
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/F6F-3_Hellcat_VF-5_USN.jpg?width=1400',
+    image: '/api/img?file=F6F-3_Hellcat_VF-5_USN.jpg&w=1200',
   },
   {
     name: 'Mediterranean & North Africa',
@@ -63,7 +63,7 @@ const theatres: Theatre[] = [
       'Operations ranged from the desert air war in Libya and Egypt — where P-40s and Hurricanes hunted the Stuka — through the Tunisian campaign, the invasion of Italy, and the long grinding air war up the peninsula. The MATAF and Desert Air Force pioneered many of the tactical air-support doctrines used in Normandy.',
     ],
     iconicAircraft: ['p-40-warhawk', 'macchi-c202-folgore', 'supermarine-spitfire', 'junkers-ju-87-stuka', 'b-24-liberator'],
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Curtiss_P-40E_Warhawk_USAF.jpg?width=1400',
+    image: '/api/img?file=Curtiss_P-40E_Warhawk_USAF.jpg&w=1200',
   },
   {
     name: 'Battle of the Atlantic',
@@ -75,7 +75,7 @@ const theatres: Theatre[] = [
       'The closure of the Mid-Atlantic Gap by Very Long Range (VLR) Liberators in early 1943 — flying from Iceland and Newfoundland — marked the turning point. By "Black May" 1943, Dönitz was forced to withdraw his wolfpacks from the central Atlantic. The shipping lanes were safe.',
     ],
     iconicAircraft: ['b-24-liberator', 'tbf-avenger'],
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Consolidated_B-24_Liberator.jpg?width=1400',
+    image: '/api/img?file=Consolidated_B-24_Liberator.jpg&w=1200',
   },
 ];
 

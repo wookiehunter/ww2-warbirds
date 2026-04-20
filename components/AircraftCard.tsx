@@ -13,6 +13,7 @@ export default function AircraftCard({ a, index = 0 }: { a: Aircraft; index?: nu
         <SafeImage
           src={a.image}
           alt={a.name}
+          wikiSlug={a.wikiSlug}
           className="w-full h-full object-cover img-treatment transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
         />

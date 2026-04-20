@@ -14,7 +14,7 @@ export default function Home() {
       <section className="relative overflow-hidden border-b border-olive-700/60">
         <div className="absolute inset-0 opacity-40">
           <SafeImage
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg?width=1800"
+            src="/api/img?file=Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg&w=1200"
             alt=""
             className="w-full h-full object-cover img-treatment"
             loading="eager"
