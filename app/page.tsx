@@ -6,7 +6,10 @@ import SafeImage from '@/components/SafeImage';
 const featured = ['supermarine-spitfire', 'p-51-mustang', 'messerschmitt-bf-109', 'mitsubishi-a6m-zero'];
 
 export default function Home() {
-  const featuredAircraft = featured.map((s) => aircraft.find((a) => a.slug === s)!);
+  const featuredAircraft = featured.flatMap((s) => {
+    const a = aircraft.find((x) => x.slug === s);
+    return a ? [a] : [];
+  });
 
   return (
     <div>
@@ -16,7 +19,6 @@ export default function Home() {
           <SafeImage
             src="https://commons.wikimedia.org/wiki/Special:FilePath/Supermarine_Spitfire_Mk_Vb_of_92_Sqn_flown_by_Geoffrey_Wellum_1941.jpg?width=1800"
             alt=""
-            wikiSlug="Supermarine_Spitfire"
             className="w-full h-full object-cover img-treatment"
             loading="eager"
           />

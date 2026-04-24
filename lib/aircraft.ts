@@ -30,7 +30,7 @@ export type Aircraft = {
 // To replace an image, swap the filename in the URL with a different
 // Commons file (or any URL — remotePatterns in next.config.js allows wildcards).
 const wm = (file: string) =>
-  `/api/img?file=${encodeURIComponent(file)}&w=1200`;
+  `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=1200`;
 
 export const aircraft: Aircraft[] = [
   // ──────────────── UNITED KINGDOM ────────────────

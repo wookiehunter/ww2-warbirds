@@ -16,8 +16,9 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    // unoptimized=true keeps things simple: no built-in image optimizer needed,
-    // plain <img> tags work without restriction, and any CDN URL renders cleanly.
+    // unoptimized=true: the project uses plain <img> tags via SafeImage, so the
+    // Next.js Image optimizer is not active. The remotePatterns above are
+    // informational and would apply if next/image components were added.
     unoptimized: true,
   },
 };

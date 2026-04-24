@@ -43,7 +43,7 @@ export default function AircraftDetail({ params }: { params: { slug: string } })
       {/* HERO */}
       <section className="relative border-b border-olive-700/60">
         <div className="absolute inset-0">
-          <SafeImage src={a.image} alt="" wikiSlug={a.wikiSlug} className="w-full h-full object-cover img-treatment" loading="eager" />
+          <SafeImage src={a.image} alt="" className="w-full h-full object-cover img-treatment" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/75 to-ink-950/60" />
         </div>
 
@@ -104,7 +104,7 @@ export default function AircraftDetail({ params }: { params: { slug: string } })
 
           {/* Image panel */}
           <figure className="border border-olive-700/60 corner-mark">
-            <SafeImage src={a.image} alt={a.name} wikiSlug={a.wikiSlug} className="w-full img-treatment" />
+            <SafeImage src={a.image} alt={a.name} className="w-full img-treatment" />
             <figcaption className="bg-ink-900/80 px-4 py-3 text-xs font-mono text-bone-100/60 uppercase tracking-wider border-t border-olive-700/40">
               {a.name} — {a.imageCredit}
             </figcaption>
